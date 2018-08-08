@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="VCOIN_V5_0_CI_NEW"
+  id="myeclipse.1390843192236"
+  context-root="/"
+  j2ee-spec="5.0"
+  archive="VCOIN_V5_0_CI_NEW.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,396 @@
+@charset "utf-8";
+
+	.center{
+			margin:0 auto;
+			width:100%;
+			text-align:center;
+		}
+.recharge .recharge-type {
+	display: inline-block;
+	border: 1px solid #d1d1d1;
+	cursor: pointer;
+	margin-right: 20px;
+	position: relative;
+}
+
+.recharge .recharge-type:hover,.recharge .recharge-type.active {
+	border: 1px solid #41c7f9;
+}
+
+.recharge .recharge-type:hover span.type-icon,.recharge .recharge-type:hover span.type-ok,.recharge .recharge-type.active span.type-icon,.recharge .recharge-type.active span.type-ok {
+	background-color: #41c7f9;
+}
+
+.recharge .recharge-type span.type {
+	line-height: 35px;
+	height: 35px;
+	padding: 0 15px;
+	float: left;
+	color: #606060;
+}
+
+.recharge .recharge-type span.type-icon {
+	background: #d1d1d1 url("../../images/finance/financeplist.png") no-repeat 6px 5px;
+	width: 35px;
+	height: 35px;
+	float: left;
+}
+
+.recharge .recharge-type span.bank {
+	background: #d1d1d1 url("../../images/finance/financeplist.png") no-repeat 4px -61px;
+}
+
+.recharge .recharge-type span.onlinebank {
+	background: #d1d1d1 url("../../images/finance/financeplist.png") no-repeat -296px 5px;
+}
+.recharge .recharge-type span.proxybank {
+	background: #d1d1d1 url("../../images/finance/financeplist.png") no-repeat -413px 5px;
+}
+.recharge .recharge-type span.wechat{
+	background: #d1d1d1 url("../../images/finance/financeplist.png") no-repeat -521px 5px;
+}
+.recharge .recharge-type span.type-ok {
+	background: url("../../images/finance/financeplist.png") no-repeat -1px -26px;
+	width: 25px;
+	height: 35px;
+	float: left;
+}
+
+.recharge .recharge-type span.realtime {
+	background: url("../../images/finance/financeplist.png") no-repeat -300px -37px;
+	position: absolute;
+	top: 0;
+	right: -41px;
+	width: 36px;
+	height: 16px;
+}
+
+.recharge .recharge-box {
+	background: #f9f9f9;
+	padding: 30px 40px;
+}
+
+.recharge .wechatqrcodetxt {
+	width: 100%;
+	height: 101px;
+	display: inline-block;
+	line-height: 101px;
+	border: 3px solid #dedede;
+	position: relative;
+	margin-top: 3px;
+	padding-left: 110px;
+}
+
+.recharge .wechatqrcodetxt i {
+	font-size: 16px;
+	color: #45383c;
+	display: inline-block;
+	text-align: center;
+	line-height: 20px;
+	font-weight: bold;
+	width: 100%;
+}
+.recharge .wechatqrcodetxt .wechatqrcode{
+	width: 107px;
+    height: 107px;
+    border: 3px solid #dedede;
+    position: absolute;
+    top: -6px;
+    left: -3px;
+}
+
+.recharge .recharge-process {
+	height: 1px;
+	border: #d4d4d4 solid 1px;
+	display: block;
+	margin-bottom: 50px;
+}
+
+.recharge .recharge-process-icon {
+	background: #fff;
+	border: #d4d4d4 solid 1px;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 30px;
+	position: absolute;
+	top: -15px;
+	left: 50%;
+	margin-left: -15px;
+	text-align: center;
+	color: #cac9c9;
+}
+
+.recharge .recharge-process-text {
+	width: 100%;
+	position: absolute;
+	top: 20px;
+	left: 0;
+	text-align: center;
+}
+
+.recharge .active .recharge-process-icon {
+	border: #ffad01 solid 1px;
+	background: #ffad01;
+	color: #fff;
+}
+
+.recharge .active .recharge-process-line {
+	height: 1px;
+	width: 60%;
+	border: #ffad01 solid 1px;
+	background: #ffad01;
+	position: absolute;
+	top: -1px;
+	left: 20%;
+	border: #ffad01 solid 1px;
+}
+
+.recharge .active .recharge-process-text {
+	color: #ffad01;
+}
+
+.recharge .randomtips {
+	position: absolute;
+	top: 0;
+	right: -10px;
+	color: #e80f1d;
+}
+
+.recharge .recharge-help {
+	background: url("../../images/finance/financeplist.png") no-repeat 0 -120px;
+	width: 215px;
+	padding-top: 110px;
+	padding-bottom: 40px;
+	display: inline-block;
+}
+
+.recharge .recharge-infobox {
+	background: #fff;
+	/* border-left: #f6dedd solid 5px; */
+}
+
+.recharge .rechage-tips {
+	background: #f6dedd;
+	line-height: 30px;
+	display: inline-block;
+	padding: 0 10px;
+	margin-bottom: 20px;
+	margin-top:10px;
+	width: 280px;
+	
+}
+
+.recharge .rechare-success {
+	padding: 30px;
+	display: block;
+	background: #fff;
+}
+
+.recharge .rechare-success .success-icon {
+	background: url("../../images/finance/financeplist.png") no-repeat 0 -300px;
+	line-height: 40px;
+	font-size: 24px;
+	color: #ffad01;
+	padding-left: 50px;
+	display: inline-block;
+	margin-bottom: 15px;
+}
+
+
+.recharge .rechare-success a {
+	color: #ffad01;
+	padding-left: 50px;
+}
+
+.recharge .recharge-qrcodetext {
+	font-size: 14px;
+	line-height: 47px;
+}
+
+.recharge .recharge-qrcodecon {
+	font-size: 14px;
+	line-height: 45px;
+	height: 45px;
+}
+
+.recharge .recharge-qrcodecon.address {
+	border: 1px solid #e6e5e5;
+}
+
+.recharge .recharge-qrcodecon button {
+	width: 280px;
+	margin: 8px 0;
+	float: left;
+	display: inline;
+}
+
+.recharge .recharge-qrcodecon .code-txt {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.recharge .recharge-qrcodecon .code-box {
+	width: 21px;
+	height: 21px;
+	float: right;
+	background: url("../../images/finance/financeplist.png") no-repeat -40px -1610px;
+	margin: 11px 0;
+	display: inline;
+	cursor: pointer;
+	position: relative;
+	z-index: 100;
+}
+
+.recharge .recharge-qrcodecon .code-box .qrcode {
+	width: 180px;
+    height: 165px;
+    position: absolute;
+    top: -70px;
+    left: 39px;
+    display: none; 
+    background: url("../../images/finance/financeplist.png") no-repeat -410px -1531px;
+    padding: 10px 10px 10px 20px;
+}
+
+.recharge .recharge-qrcodecon .code-box:hover .qrcode {
+	display: block;
+}
+/*************banklist****************/
+.recharge .bank-item {
+	width: 126px;
+	height: 50px;
+	display: inline-block;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	position: relative;
+	border: #dcdcdc 1px solid;
+}
+
+.recharge .bank-item:hover .bank-item-checked {
+	display: block;
+}
+
+.recharge .bank-item .bank-item-checked {
+	border: #41c7f9 solid 1px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 126px;
+	height: 50px;
+	display: none;
+	background: url("../../images/finance/financeplist.png") no-repeat 97px -1660px;
+}
+
+.recharge .bank-nbcb {
+	background: url("../../images/finance/bankicon/nbcb.gif") no-repeat center center;
+}
+
+.recharge .bank-bea {
+	background: url("../../images/finance/bankicon/bea.gif") no-repeat center center;
+}
+
+.recharge .bank-cib {
+	background: url("../../images/finance/bankicon/cib.gif") no-repeat center center;
+}
+
+.recharge .bank-shb {
+	background: url("../../images/finance/bankicon/shb.gif") no-repeat center center;
+}
+
+.recharge .bank-psbc {
+	background: url("../../images/finance/bankicon/psbc.gif") no-repeat center center;
+}
+
+.recharge .bank-pab {
+	background: url("../../images/finance/bankicon/pab.gif") no-repeat center center;
+}
+
+.recharge .bank-bjb {
+	background: url("../../images/finance/bankicon/bjb.gif") no-repeat center center;
+}
+
+.recharge .bank-cncb {
+	background: url("../../images/finance/bankicon/cncb.gif") no-repeat center center;
+}
+
+.recharge .bank-cgb {
+	background: url("../../images/finance/bankicon/cgb.gif") no-repeat center center;
+}
+
+.recharge .bank-spdb {
+	background: url("../../images/finance/bankicon/spdb.gif") no-repeat center center;
+}
+
+.recharge .bank-cmsb {
+	background: url("../../images/finance/bankicon/cmsb.gif") no-repeat center center;
+}
+
+.recharge .bank-hxb {
+	background: url("../../images/finance/bankicon/hxb.gif") no-repeat center center;
+}
+
+.recharge .bank-ceb {
+	background: url("../../images/finance/bankicon/ceb.gif") no-repeat center center;
+}
+
+.recharge .bank-cmb {
+	background: url("../../images/finance/bankicon/cmb.gif") no-repeat center center;
+}
+
+.recharge .bank-comm {
+	background: url("../../images/finance/bankicon/comm.gif") no-repeat center center;
+}
+
+.recharge .bank-ccb {
+	background: url("../../images/finance/bankicon/ccb.gif") no-repeat center center;
+}
+
+.recharge .bank-boc {
+	background: url("../../images/finance/bankicon/boc.gif") no-repeat center center;
+}
+
+.recharge .bank-abc {
+	background: url("../../images/finance/bankicon/abc.gif") no-repeat center center;
+}
+
+.recharge .bank-icbc {
+	background: url("../../images/finance/bankicon/icbc.gif") no-repeat center center;
+}
+
+.recharge .recharge-online {
+	width: 287px;
+	display: inline-block;
+}
+
+.recharge .recharge-online-success {
+	background: url("../../images/comm/success.jpg") no-repeat 0 0;
+	width: 287px;
+	height: 210px;
+	display: inline-block;
+	position: relative;
+}
+
+.recharge .recharge-online-success.failure {
+	background: url("../../images/comm/failure.jpg") no-repeat 0 0;
+	width: 287px;
+	height: 210px;
+	display: inline-block;
+	position: relative;
+}
+
+.recharge-online-text {
+	display: inline-block;
+	font-size: 22px;
+	color: #359e7d;
+	position: absolute;
+	left: 0;
+	bottom: 35px;
+	width: 100%;
+	text-align: center;
+}
+
+.recharge-online-text.failure {
+	color: #ff4f4e;
+}

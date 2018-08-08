@@ -1,0 +1,10 @@
+@charset "utf-8";
+.index-top-icon{
+	background: #f9f9f9 url("../../images/finance/financeplist.png") no-repeat 0 -460px;
+	line-height: 137px;
+}
+.index-top-icon span{
+	height:35px;
+	line-height: 35px;
+	display: block;
+}

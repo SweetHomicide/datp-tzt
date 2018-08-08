@@ -1,0 +1,129 @@
+@charset "utf-8";
+/*header*/
+.dowload {
+	height: 790px;
+	background: url("../../images/dowload/dowload-bg.jpg") no-repeat 50% 50%;
+}
+
+.dowload .nav>li>a {
+	font-size: 14px;
+	padding-left: 15px;
+	color: #ffffff;
+}
+
+.dowload .nav>li>a:hover {
+	color: #c83935;
+}
+
+.dowload .nav-pills>li.active>a,.nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus {
+	color: #c83935;
+}
+
+.header.header-nav {
+	border-top: #d3d3d3 solid 1px;
+	padding-top: 20px;
+	font-size: 1.2em;
+}
+
+.dowload .navbar-nav .split {
+	position: absolute;
+	right: 0;
+	top: 15px;
+}
+
+.dowload .logo img {
+	height: 100%;
+}
+
+.dowload .nav>li>a:hover,.header.nav>li>a:focus {
+	background: transparent;
+	color: #79110e;
+}
+
+.dowload .dcenter {
+	background: url("../../images/dowload/dowload-list.png") no-repeat 0 0px;
+	width: 500px;
+	height: 250px;
+	margin-top: 115px;
+	position: relative;
+	font-size: 20px;
+}
+
+.dowload .dcenter .dcinfo {
+	background-color: #fff;
+	color: #c83935;
+	position: absolute;
+	bottom: 55px;
+	width: 95%;
+	padding-left: 10px;
+}
+
+.dowload .dcenter .dcinfo ul {
+	margin-bottom: 0px;
+}
+
+.dowload .dcenter .dcinfo span {
+	margin-left: 10px;
+}
+
+.dowload .dcenter .dcdate {
+	color: #fff;
+	position: absolute;
+	bottom: 25px;
+	font-size: 15px;
+	width: 95%;
+}
+
+.dowload .dcenter-img {
+	width: 500px;
+}
+
+.dowload .dcenter-img img {
+	width: 160px;
+	height: 160px;
+}
+
+.dowload .dcenter-img .dcenter-type a {
+	width: 270px;
+	height: 75px;
+	background: url("../../images/dowload/dowload-list.png") no-repeat 0 -261px;
+	display: block;
+}
+
+.dowload .dcenter-img .dcenter-type a:last-child {
+	background: url("../../images/dowload/dowload-list.png") no-repeat -634px -263px;
+	margin-top: 15px;
+}
+
+.dbottom {
+	background: url("../../images/dowload/dowload-bottombg.jpg") no-repeat 50% 50%;
+}
+
+.dbottom .bottom-infos {
+	margin-top: 30px;
+}
+
+.dbottom .bottom-line {
+	height: 15px;
+	background-color: #c73911;
+}
+
+.dbottom .bottom-info {
+	width: 380px;
+}
+
+.dbottom .bottom-info .bi-img {
+	background: url("../../images/dowload/dowload-list.png") no-repeat 0 -425px;
+	width: 45px;
+	height: 45px;
+	margin: 0px;
+	display: inline-block;
+}
+
+.dbottom #bi2 {
+	background: url("../../images/dowload/dowload-list.png") no-repeat -320px -425px;
+}
+
+.dbottom #bi3 {
+	background: url("../../images/dowload/dowload-list.png") no-repeat -632px -425px;
+}

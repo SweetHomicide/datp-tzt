@@ -1,0 +1,49 @@
+package com.ruizton.main.service.admin;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ruizton.main.dao.FbankinfoWithdrawDAO;
+import com.ruizton.main.model.FbankinfoWithdraw;
+
+@Service
+public class BankinfoWithdrawService {
+	@Autowired
+	private FbankinfoWithdrawDAO bankinfoWithdrawDAO;
+	@Autowired
+	private HttpServletRequest request;
+
+	public FbankinfoWithdraw findById(String id) {
+		return this.bankinfoWithdrawDAO.findById(id);
+	}
+
+	public void saveObj(FbankinfoWithdraw obj) {
+		this.bankinfoWithdrawDAO.save(obj);
+	}
+
+	public void deleteObj(String id) {
+		FbankinfoWithdraw obj = this.bankinfoWithdrawDAO.findById(id);
+		this.bankinfoWithdrawDAO.delete(obj);
+	}
+
+	public void updateObj(FbankinfoWithdraw obj) {
+		this.bankinfoWithdrawDAO.attachDirty(obj);
+	}
+
+	public List<FbankinfoWithdraw> findByProperty(String name, Object value) {
+		return this.bankinfoWithdrawDAO.findByProperty(name, value);
+	}
+
+	public List<FbankinfoWithdraw> findAll() {
+		return this.bankinfoWithdrawDAO.findAll();
+	}
+
+	public List<FbankinfoWithdraw> list(int firstResult, int maxResults,
+			String filter,boolean isFY) {
+		return this.bankinfoWithdrawDAO.list(firstResult, maxResults, filter,isFY);
+	}
+}

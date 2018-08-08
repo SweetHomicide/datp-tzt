@@ -1,0 +1,74 @@
+@charset "utf-8";
+
+.record .datainput {
+	background: #f1f1f1;
+	border: none;
+    width: 100px;
+    outline: none;
+}
+
+.record .databtn {
+	padding: 5px 15px;
+	cursor: pointer;
+	margin: 0 10px;
+	display: inline-block;
+}
+.cointype{
+	 color: #000000;
+	 text-decoration:none;
+	 font-size:20px;
+	 line-height:60px;
+	 text-decoration:none;
+	 
+	/*  border:1px solid red; */
+}
+
+.arrow-up {
+  float:right;margin-top:25px;
+  width:0px;
+  height:0px;
+  border-left:5px solid transparent;  /* 右透明 */
+  border-right:5px solid transparent; /*右透明 */
+  border-bottom:10px solid #2f2f2f; /* 定义底部颜色 */
+  font-size:0px;
+  line-height:10px;
+}
+.arrow-down {
+  float:right;
+  margin-top:25px;	
+  width:0px;
+  height:0px;
+  border-left:5px solid transparent;
+  border-right:5px solid transparent;
+  border-top:10px solid #2f2f2f;
+  font-size:0px;
+  line-height:10px;
+}
+.nav-stacked a{
+	color:#000;
+}
+.cur{
+	border-bottom:2px solid red;
+}
+
+.record .datatime:hover {
+	color: #fff;
+	background: #41c7f9;
+}
+
+.record .datatime-sel {
+	color: #fff;
+	background: #41c7f9;
+}
+
+.record .datatips {
+	padding: 5px 5px;
+}
+.record .typeselect{
+	width: 170px;
+    display: inline-block;
+    margin: 0 10px;
+}
+#fentrustsbody0 th{
+	text-align:left;
+}

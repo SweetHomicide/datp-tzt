@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task"  
+	xsi:schemaLocation="
+             http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+             http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+             http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+	        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+    <task:annotation-driven/>  
+	<!-- 配置事务管理器bean,使用HibernateTransactionManager事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="transactionTemplate"
+		class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+	</bean>
+	<!-- 配置事务的传播特性 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- 哪些类的哪些方法参与事务 -->
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="serviceAdminMethod"
+			expression="execution(* com.ruizton.main.service.*.*.*(..))" />
+		<aop:advisor pointcut-ref="serviceAdminMethod" advice-ref="txAdvice" />
+	</aop:config>
+
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+
+	<context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+         <props>        
+               <prop key="hibernate.dialect">${hibernate.dialect}</prop>          
+               <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+               
+               <prop key="hibernate.cache.use_second_level_cache">true</prop>  
+				<prop key="hibernate.cache.use_query_cache">true</prop>  
+				<!-- 设置二级缓存插件EHCache的Provider类-->  
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				<prop key="hibernate.cache.region_prefix">encache_</prop>
+				<prop key="hibernate.cache.use_structured_entries">true</prop>  
+				<prop key="hibernate.generate_statistics">false</prop>
+<!--                 <prop key="hibernate.cache.use_query_cache">true</prop> -->
+<!--                 <prop key="hibernate.cache.use_second_level_cache">true</prop> -->
+<!--                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop> -->
+          		<!-- 自动建表 -->
+          		<!-- <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>   -->
+          </props>
+       </property>
+
+       <property name="packagesToScan">
+       <list>
+       <value>com.ruizton.main.model</value>
+       <value>com.ditp.entity</value>
+       </list>
+       </property>
+	</bean>
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="user">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>${jdbc.maxPoolSize}</value>
+		</property>
+		<property name="minPoolSize">
+			<value>${jdbc.minPoolSize}</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>${jdbc.initialPoolSize}</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>${jdbc.maxIdleTime}</value>
+		</property>
+		<!-- 每60秒检查所有连接池中的空闲连接。Default: 0 -->
+		<property name="idleConnectionTestPeriod" value="60" />
+ 		<!--如果设为true那么在取得连接的同时将校验连接的有效性。Default: false -->
+		<property name="testConnectionOnCheckin" value="true" />
+
+	</bean>
+
+	<bean id="constantMap" class="com.ruizton.main.comm.ConstantMap" scope="singleton" init-method="init"></bean>
+	<bean id="validateMap" class="com.ruizton.main.comm.ValidateMap" scope="singleton"></bean>
+	<bean id="taskList" class="com.ruizton.main.auto.TaskList" scope="singleton" init-method="init"/>
+	<!-- tasks -->
+	<bean class="com.ruizton.main.auto.AutoSendMessage" id="sendMessageTask"></bean>
+	<bean class="com.ruizton.main.auto.AutoSendMail" id="sendMailTask"></bean>
+	<!-- <bean class="com.ruizton.main.auto.AutoDealMaking" id="autoDealMaking"></bean> -->
+	<!-- <bean class="com.ruizton.main.auto.AutoRechargeBtc" id="autoRechargeBtc"></bean> -->
+	<!-- <bean class="com.ruizton.main.auto.AutoDealingOneDayData" id="autoDealingOneDayData"></bean> -->
+	<bean class="com.ruizton.main.auto.AutoMinuteKline" id="autoMinuteKline"></bean>
+	<!-- <bean class="com.ruizton.main.auto.AutoCalculateDepth" id="autoCalculateDepth"></bean> -->
+	<!-- <bean class="com.ruizton.main.auto.AutoAddFentrustLogScore" id="autoAddFentrustLogScore"></bean> -->
+<!-- 	<bean class="com.ruizton.main.auto.AutoPopcorn" id="openPopcornTask"></bean>
+	<bean class="com.ruizton.main.auto.AutoPopcornSendMoney" id="popcornSendMoneyTask"></bean> -->
+<!-- 	<bean class="com.ruizton.main.auto.AutoZhongDou" id="zhongdou"></bean>
+	<bean class="com.ruizton.main.auto.AutoDealLendData" id="autoDealLendData"></bean>
+	<bean class="com.ruizton.main.auto.AutoDealLendFees" id="autoDealLendFees"></bean>
+	<bean class="com.ruizton.main.auto.AutoDealBorrowData" id="autoDealBorrowData"></bean>
+	<bean class="com.ruizton.main.auto.AutoDealBorrowReturn" id="autoDealBorrowReturn"></bean>
+	<bean class="com.ruizton.main.auto.PushUtil" id="autoPushUtil"></bean> -->
+	
+	<!--推送 -->
+	<!-- <bean id="autoPushUtilTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="autoPushUtil" />
+	<property name="period" >
+	<value>1000</value>
+	</property>
+	</bean> -->
+	
+	<!--种豆 -->
+	<!-- <bean id="zhongdouTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="zhongdou" />
+	<property name="period" >
+	<value>60000</value>
+	</property>
+	</bean> -->
+	
+	<!--P2P 借款事务处理-->
+	<!-- <bean id="autoDealBorrowDataTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="autoDealBorrowData" />
+	<property name="period" >
+	<value>30000</value>
+	</property>
+	</bean> -->
+	
+	<!--P2P FEES-->
+	<!-- <bean id="autoDealLendFeesTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="autoDealLendFees" />
+	<property name="period" >
+	<value>60000</value>
+	</property>
+	</bean> -->
+	
+	<!--P2P还款通知-->
+	<!-- <bean id="autoDealBorrowReturnTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="autoDealBorrowReturn" />
+	<property name="period" >
+	<value>600000</value>
+	</property>
+	</bean> -->
+	
+	<!--P2P -->
+	<!-- <bean id="autoDealLendDataTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="autoDealLendData" />
+	<property name="period" >
+	<value>1000</value>
+	</property>
+	</bean> -->
+		
+	<!--开爆米花 -->
+<!-- 	<bean id="scheduleOpenPopcornTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="openPopcornTask" />
+	<property name="period" >
+	<value>1000</value>
+	</property>
+	</bean> -->
+	
+	<!--开爆米花 -->
+<!-- 	<bean id="schedulePopcornSendMoneyTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="popcornSendMoneyTask" />
+	<property name="period" >
+	<value>1000</value>
+	</property>
+	</bean> -->
+	
+	<!--统计用户积分 -->
+<!-- 	<bean id="scheduleAddFentrustLogScore" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="autoAddFentrustLogScore" />
+	<property name="period" >
+	<value>5000</value>
+	</property>
+	</bean> -->
+	<!--发送验证短信 -->
+	<bean id="scheduleSendMessageTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="sendMessageTask" />
+	<property name="period" >
+	<value>1000</value>
+	</property>
+	</bean>
+	<!--发送验证邮件 -->
+ 	<bean id="scheduleSendMailTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="sendMailTask" />
+	<property name="delay">
+	<value>1000</value>
+	</property>
+	<property name="period" >
+	<value>1000</value>
+	</property>
+	</bean>
+	<!--自动撮合 -->
+<!-- 	<bean id="scheduleAutoDealMakingTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="autoDealMaking" />
+	<property name="period" >
+	<value>1000</value>
+	</property>
+	</bean> -->
+	<!--比特币充值 -->
+<!-- 	<bean id="scheduleAutoDealRechargeBtc" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="autoRechargeBtc" />
+	<property name="period" >
+	<value>10000</value>
+	</property>
+	</bean> -->
+	<!--一天交易量、大小值 -->
+<!-- 	<bean id="scheduleAutoDealingOneDayData" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="autoDealingOneDayData" />
+	<property name="period" >
+	<value>60000</value>
+	</property>
+	</bean> -->
+	<!--k线图统计数据 -->
+	<bean id="scheduleAutoMinuteKline" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="autoMinuteKline" />
+	<property name="period" >
+	<value>60000</value>
+	</property>
+	</bean>
+	<!--市场深度数据合并 -->
+<!-- 	<bean id="scheduleAutoCalculateDepth" class="org.springframework.scheduling.timer.ScheduledTimerTask">   
+	<property name="timerTask" ref="autoCalculateDepth" />
+	<property name="period" >
+	<value>500</value>
+	</property>
+	</bean> -->
+	
+<!-- <bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+	<property name="scheduledTimerTasks">
+	   <list>
+			<ref bean="zhongdouTask"/>
+	   </list>
+	</property>
+</bean>	 -->
+
+<!-- 推送 -->
+<!-- <bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+	<property name="scheduledTimerTasks">
+	   <list>
+			<ref bean="autoPushUtilTask"/>
+	   </list>
+	</property>
+</bean>	 -->
+
+<!-- P2P -->
+<!-- <bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+	<property name="scheduledTimerTasks">
+	   <list>
+			<ref bean="autoDealLendDataTask"/>
+	   </list>
+	</property>
+</bean>	 -->		
+
+<!-- P2P FEES -->
+<!-- <bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+	<property name="scheduledTimerTasks">
+	   <list>
+			<ref bean="autoDealLendFeesTask"/>
+	   </list>
+	</property>
+</bean> -->
+
+<!-- P2P FEES -->
+<!-- <bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+	<property name="scheduledTimerTasks">
+	   <list>
+			<ref bean="autoDealBorrowReturnTask"/>
+	   </list>
+	</property>
+</bean> -->
+
+<!-- P2P 事务处理 -->
+<!-- <bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+	<property name="scheduledTimerTasks">
+	   <list>
+			<ref bean="autoDealBorrowDataTask"/>
+	   </list>
+	</property>
+</bean> -->
+	
+	<!-- 爆米花 -->
+<!-- <bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+	<property name="scheduledTimerTasks">
+	   <list>
+			<ref bean="scheduleOpenPopcornTask"/>
+	   </list>
+	</property>
+</bean>	 -->
+
+	<!-- 爆米花 -->
+<!-- <bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+	<property name="scheduledTimerTasks">
+	   <list>
+			<ref bean="schedulePopcornSendMoneyTask"/>
+	   </list>
+	</property>
+</bean>	 -->
+
+	
+<bean class="org.springframework.scheduling.timer.TimerFactoryBean">
+	<property name="scheduledTimerTasks">
+	   <list>
+			<ref bean="scheduleSendMessageTask"/>
+	   </list>
+	</property>
+	</bean>
+ 	<bean class="org.springframework.scheduling.timer.TimerFactoryBean">   
+	<property name="scheduledTimerTasks">
+	   <list>
+			<ref bean="scheduleSendMailTask"/>
+	   </list>
+	</property>
+	</bean>
+<!-- 	<bean class="org.springframework.scheduling.timer.TimerFactoryBean">   
+	<property name="scheduledTimerTasks">
+	   <list>
+			<ref bean="scheduleAutoDealRechargeBtc"/>
+	   </list>
+	</property>
+	</bean> -->
+<!-- 	<bean class="org.springframework.scheduling.timer.TimerFactoryBean">   
+	<property name="scheduledTimerTasks">
+	   <list>
+	   		<ref bean="scheduleAutoDealMakingTask"/>
+	   </list>
+	</property>
+	</bean>
+	<bean class="org.springframework.scheduling.timer.TimerFactoryBean">   
+	<property name="scheduledTimerTasks">
+	   <list>
+	   		<ref bean="scheduleAutoDealingOneDayData"/>
+	   </list>
+	</property>
+	</bean> -->
+	<bean class="org.springframework.scheduling.timer.TimerFactoryBean">   
+	<property name="scheduledTimerTasks">
+	   <list>
+	   		<ref bean="scheduleAutoMinuteKline"/>
+	   </list>
+	</property>
+	</bean>
+<!-- 	<bean class="org.springframework.scheduling.timer.TimerFactoryBean">   
+	<property name="scheduledTimerTasks">
+	   <list>
+	   		<ref bean="scheduleAutoCalculateDepth"/>
+	   </list>
+	</property>
+	</bean> -->
+<!-- 	<bean class="org.springframework.scheduling.timer.TimerFactoryBean">   
+	<property name="scheduledTimerTasks">
+	   <list>
+	   		<ref bean="scheduleAddFentrustLogScore"/>
+	   </list>
+	</property>
+	</bean> -->
+
+
+	<bean class="com.ruizton.main.auto.LatestKlinePeroid" scope="singleton" init-method="init"></bean>
+	<!-- 实时数据 -->
+	<!-- <bean class="com.ruizton.main.auto.LendRealTimeData" scope="singleton" init-method="init"></bean> -->
+	<!-- 实时数据 -->
+	<bean class="com.ruizton.main.auto.RealTimeData" scope="singleton" init-method="init"></bean>
+	<!--比特币充值 -->
+	<bean class="com.ruizton.main.auto.RechargeBtcData" scope="singleton" init-method="init"></bean>
+	<bean class="com.ruizton.util.AutoRechargeBtc" scope="singleton"></bean>
+	<bean class="com.ruizton.util.AutoRechargeBtcAll" scope="singleton"></bean>
+		<bean class="com.ruizton.main.auto.AutoCalculateDepth" scope="singleton" init-method="init"></bean>
+	<bean class="com.ruizton.main.auto.AutoDealingOneDayData" scope="singleton" init-method="init"></bean>
+	<bean class="com.ruizton.main.auto.AutoDealMaking" scope="singleton" init-method="init"></bean>
+	<!-- 交易量 -->
+	<bean class="com.ruizton.main.auto.OneDayData" scope="singleton"></bean>
+	<!-- k线图数据 -->
+	<bean class="com.ruizton.main.auto.KlinePeriodData" scope="singleton" init-method="init"></bean>
+		<!-- 爆米花 -->
+<!-- 	<bean class="com.ruizton.main.auto.AutoPopcorn" scope="singleton"></bean> -->
+<!-- 	<bean class="com.ruizton.main.auto.AutoZhongDou" scope="singleton"></bean> -->
+	
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.ruizton.main.controller" />
+	<context:component-scan base-package="com.ruizton.main.service" />
+	<context:component-scan base-package="com.ruizton.payment.service.impl" />
+	<context:component-scan base-package="com.ruizton.main.dao" />
+	
+	<context:component-scan base-package="com.ruizton.main.controller.front" />
+	<context:component-scan base-package="com.ruizton.main.service.front" />
+	<context:component-scan base-package="com.ruizton.main.controller.admin" />
+	<context:component-scan base-package="com.ruizton.main.service.admin" />
+
+	<context:component-scan base-package="com.ruizton.main.auto" />
+	<!-- lrc  begin
+ 	<context:component-scan base-package="com.ditp.test" />-->	
+ 	    <context:component-scan base-package="com.ditp.service" /> 
+    <context:component-scan base-package="com.ditp.service.wallet" /> 
+    <context:component-scan base-package="com.ditp.filter" />
+    <context:component-scan base-package="com.ditp.controller" />
+     <context:component-scan base-package="com.ditp.service" />
+     <context:component-scan base-package="com.ditp.service.impl" />
+    <context:component-scan base-package="com.alipay.demo.trade.service" />
+    <context:component-scan base-package="com.ditp.dao" />
+    <context:component-scan base-package="com.ditp.redis" />
+    <context:component-scan base-package="com.ditp.auto" />
+    <!-- lrc end-->
+    
+
+	<mvc:annotation-driven />
+	
+	<!-- 国际化资源文件 -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="classpath:messages"/>
+        <property name="useCodeAsDefaultMessage" value="true"/>
+    </bean>
+    
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="zh_CN" />
+	</bean>
+    
+</beans>
