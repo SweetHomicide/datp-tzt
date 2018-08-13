@@ -645,6 +645,13 @@ public class RedisDAO {
 	public Map<String, String> getHash(String hkey) {
 		return redisManager.hgetall(hkey);
 	}
+	/**
+	 * 获取hash数据类型中指定字段的值
+	 * 对应的命令 ：	HGET key field
+	 * @param key
+	 * @param item
+	 * @return
+	 */
 	public String hget(String key, String item) {
 		return redisManager.hget(key, item);
 	}

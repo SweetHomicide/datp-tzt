@@ -93,6 +93,20 @@ public class RedisService {
 	public Map<String, String> getHashAll(String hkey) {
 		return redisDAO.getHash(hkey);
 	}
+	
+	
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           hget 
+	 *  时间：           2018年8月9日
+	 *  描述：          获取hash数据类型中指定字段的值
+	 *         对应的命令  HGET key field   
+	 *  
+	 *  @param key  ConstantMap
+	 *  @param item 
+	 *  @return
+	 */
 	public String hget(String key, String item) {
 		return redisDAO.hget(key, item);
 	}

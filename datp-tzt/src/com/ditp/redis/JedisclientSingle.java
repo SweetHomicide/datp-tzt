@@ -169,8 +169,8 @@ public class JedisclientSingle implements JedisClient {
 		}
 	}
 	/**
-	 * 获取hash数据类型
-	 * 
+	 * 获取hash数据类型中指定字段的值
+	 * 对应的命令 ：	HGET key field
 	 * @param key
 	 * @param item
 	 * @return

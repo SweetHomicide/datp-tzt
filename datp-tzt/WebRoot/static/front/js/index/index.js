@@ -1,3 +1,27 @@
+//Start
+$(
+		function () {
+				$(".title .kind").bind('click',function(){
+					console.log(this.textContent)
+					$(this).addClass("active");
+					$(this).siblings().removeClass("active");
+					switch(this.textContent)
+					{
+						case 'USDT':console.log('USDT');
+						break;
+						case 'BTC':console.log('BTC');
+						break;
+						case 'ETH':console.log('ETH');
+						break;
+						case 'TIP':console.log('TIP');
+						break;						
+						default:console.log('error');
+						break;
+					}
+				})
+			}
+)
+//end
 var count1=0;count2=0,count3=0,count4=0;
 var login={
 		indexLoginOnblur:function () {

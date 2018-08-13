@@ -8,14 +8,18 @@
 <!doctype html>
 <html>
 <head>
-<base href="<%=basePath%>" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<%@include file="comm/link.inc.jsp"%>
-<link rel="stylesheet" href="/static/front/css/index/index.css"
-	type="text/css"></link>
+	<base href="<%=basePath%>" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!-- 引入资源文件 -->
+	<%@include file="comm/link.inc.jsp"%>
+	<link rel="stylesheet" href="/static/front/css/index/index.css" type="text/css"></link>
 </head>
 <body class="gray-bg">
+	
+	<!-- header -->
 	<%@include file="comm/header.jsp"%>
+	
+	<!-- start -->
 	<div class="container-full ">
 		<div class="container login-box">
 			<c:if test="${login_user!=null }">
@@ -83,24 +87,19 @@
 							</h3>
 						</div>
 						<div class="form-group">
-							<input class="form-control" id="indexLoginName" value=""
-								placeholder="输入邮件或手机" type="text">
+							<input class="form-control" id="indexLoginName" value="" placeholder="输入邮件或手机" type="text">
 						</div>
 						<div class="form-group">
-							<input class="form-control" id="indexLoginPwd" value=""
-								placeholder="输入密码" type="password">
+							<input class="form-control" id="indexLoginPwd" value="" placeholder="输入密码" type="password">
 						</div>
 						<div class="form-group has-error">
-							<span id="indexLoginTips"
-								class="errortips text-danger help-block"></span>
+							<span id="indexLoginTips" class="errortips text-danger help-block"></span>
 						</div>
 						<div class="form-group">
-							<button id="loginbtn" class="btn btn-block btn-primary">
-								登录</button>
+							<button id="loginbtn" class="btn btn-block btn-primary"> 登录</button>
 						</div>
 						<div class="form-group">
-							<a href="validate/reset.html">忘记密码？</a> <a
-								href="user/register.html" class="pull-right">注册</a>
+							<a href="validate/reset.html">忘记密码？</a> <a href="user/register.html" class="pull-right">注册</a>
 						</div>
 					</div>
 
@@ -114,8 +113,8 @@
 					</div> -->
 				</div>
 			</c:if>
-
 		</div>
+		
 		<div id="shuffling" class="carousel slide" data-ride="carousel">
 			<ol class="carousel-indicators">
 				<li data-target="#shuffling" data-slide-to="0" class="active"></li>
@@ -123,18 +122,17 @@
 				<li data-target="#shuffling" data-slide-to="2"></li>
 			</ol>
 			<div class="carousel-inner">
-				<a class="item active"
-					href="${requestScope.constant['bigImageURL1'] }"
-					style="background: url('${requestScope.constant['bigImage1'] }') no-repeat 50% 50%;height: 400px;"></a>
+				<a class="item active" href="${requestScope.constant['bigImageURL1'] }"
+					style="background: url('${requestScope.constant['bigImage1'] }') no-repeat 50% 50%;height: 600px;"></a>
 				<a class="item" href="${requestScope.constant['bigImageURL2'] }"
-					style="background: url('${requestScope.constant['bigImage2'] }') no-repeat 50% 50%;height: 400px;"></a>
+					style="background: url('${requestScope.constant['bigImage2'] }') no-repeat 50% 50%;height: 600px;"></a>
 				<a class="item" href="${requestScope.constant['bigImageURL3'] }"
-					style="background: url('${requestScope.constant['bigImage3'] }') no-repeat 50% 50%;height:400px;"></a>
+					style="background: url('${requestScope.constant['bigImage3'] }') no-repeat 50% 50%;height: 600px;"></a>
 			</div>
 		</div>
 	</div>
 
-
+	<!--  新闻
 	<div class="container-full notice" style="overflow: hidden;">
 		<div class="container text-center" id="newstoplist"
 			style="overflow: hidden; height: 45px; width: auto; color: #ffffff;">
@@ -149,13 +147,13 @@
 			</div>
 		</div>
 	</div>
-
+ 	-->
+ 	
 	<c:if test='${isHiddenDeal eq "false" }'>
 		<div class="container-full index market">
 			<div class="container">
 				<div class="row" style="margin-bottom: 10px;">
-					<div class="col-xs-12"
-						style="padding-left: 10px; border-left: 7px solid #215591;">
+					<div class="col-xs-12" style="padding-left: 10px; border-left: 7px solid #215591;">
 						<div class="row">
 							<div class="col-xs-12">
 								<span style="font-size: 22px">交易类型</span>
@@ -167,39 +165,101 @@
 							</div>
 							<div class="col-xs-3 col-xs-offset-5">
 								<div class="input-group">
-									<input type="text" class="form-control input" id="searchCon"
-										onkeypress="if(event.keyCode==13) {searchfirst();}"><span
-										class="input-group-addon btn btn-primary" id="btnSearch"><i
-										class="glyphicon glyphicon-search"></i></span>
+									<input type="text" class="form-control input" id="searchCon" onkeypress="if(event.keyCode==13) {searchfirst();}">
+										<span class="input-group-addon btn btn-primary" id="btnSearch">
+											<i class="glyphicon glyphicon-search"></i>
+										</span>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
+				<div class="row title">
+					<div class="col-lg-2 kind active"><img src="static/front/images/index/usdt.svg" />USDT</div>
+					<div class="col-lg-2 kind"><img src="static/front/images/index/btc.svg" />BTC</div>
+					<div class="col-lg-2 kind"><img src="static/front/images/index/eth.svg" />ETH</div>
+					<div class="col-lg-2 kind" style="border-right: 1px solid #4e5b85;"><img src="static/front/images/index/favicon.png" />TIP</div>
+				</div>
+		
 				<table class="table table-striped table-hover" id="row-value">
 					<tr class="th">
 						<td class="col-xs-2 text-center">数字资产</td>
+						
 						<td class="col-xs-2 text-center" id="_price">最新成交价<i
 							class="cagret cagret-down"></i><i class="cagret cagret-up"></i></td>
+							
 						<td class="col-xs-2 text-center" id="_totalAmt">24H成交额<i
 							class="cagret cagret-down"></i><i class="cagret cagret-up"></i></td>
+							
 						<td class="col-xs-2 text-center" id="_total">24H成交量<i
 							class="cagret cagret-down"></i><i class="cagret cagret-up"></i></td>
+							
 						<td class="col-xs-1 text-center" id="_rose">24H涨跌<i
 							class="cagret cagret-down"></i><i class="cagret cagret-up"></i></td>
+							
 						<td class="col-xs-2 text-center">价格趋势(3日)</td>
+						
 						<td class="col-xs-1 text-center">操作</td>
 					</tr>
 				</table>
-				<input type="hidden" id="hidCol" value="" /> <input type="hidden"
-					id="hidOrder" value="" /> <input type="hidden" id="hidSearch"
-					value="" /> <input type="hidden" id="forwardUrl"
-					value="${forwardUrl}" />
+				
+				<input type="hidden" id="hidCol"    value="" /> 
+				<input type="hidden" id="hidOrder"  value="" /> 
+				<input type="hidden" id="hidSearch" value="" /> 
+				<input type="hidden" id="forwardUrl" value="${forwardUrl}" />
 				<div id="fenye" style="float: right"></div>
 			</div>
 		</div>
 	</c:if>
+	
+	
+	
+	
+	
+	
+	<!-- new add  -->
+
+		<div class="container bg">
+			<div class="row">
+				<div class="col-lg-6 bg-t">
+					<h2>全球化的数字资产配置及交易服务</h2>
+					<p>遍布全球的项目拓展及运营管理体系<br>
+					在多个国家和地区设有本地交易服务中心<br>
+					服务超过130个国家的数百万用户</p>
+				</div>
+				<div class="col-lg-6 bg-p">
+					<img src="static/front/images/index/b1.png">
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-6 bg-p">
+					<img src="static/front/images/index/b2.png">
+				</div>
+				<div class="col-lg-6 bg-t">
+					<h2>SMART-Chain资产评估模型</h2>
+					<p>独立专业的区块链资产研究评估体系<br>
+					长期跟踪产业链并提供最权威中立的资产分析<br>
+					一站式的项目进度跟踪及信息披露系统</p>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-6 bg-t">
+					<h2>依托火币4年的数字资产安全风控经验</h2>
+					<p>安全稳定运营数字资产交易所超过四年<br>
+					管理资产规模超过10亿美金，服务数百万用户<br>
+					专业分布式架构和防DDOS攻击系统<br>
+					98% 数字资产存储多重签名冷钱包</p>
+				</div>
+				<div class="col-lg-6 bg-p">
+					<img src="static/front/images/index/b3.png">
+				</div>
+			</div>	
+				
+		</div>
+	<!-- 
 	<div class="container-full index news">
 		<div class="container">
 			<div class="row" style="margin-bottom: 10px;">
@@ -291,13 +351,12 @@
 			</div>
 
 			<div class="clearfix"></div>
-
-
 		</div>
 	</div>
+	 -->
 	</div>
+	<!--
 	<div class="container-full about index">
-
 		<div class="container">
 			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-xs-12"
@@ -352,6 +411,8 @@
 			</div>
 		</div>
 	</div>
+	-->
+	<!-- 不要
 	<div class="container-full index news">
 		<div class="container">
 			<div class="row" style="margin-bottom: 10px;">
@@ -400,12 +461,13 @@
 			</div>
 
 			<div class="clearfix"></div>
-
-
 		</div>
 	</div>
+	-->
+	<!-- end -->
+	
+	
 	<div class="container-full about index">
-
 		<div class="container">
 			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-xs-12"
@@ -515,7 +577,6 @@
 	<input type="hidden" id="errormsg" value= />
 	<input type="hidden" id="isHiddenDeal" value="${isHiddenDeal}" />
 	<script type="text/javascript" src="/static/front/js/index/index.js"></script>
-	<script type="text/javascript"
-		src="/static/front/js/plugin/jquery.flot.js"></script>
+	<script type="text/javascript" src="/static/front/js/plugin/jquery.flot.js"></script>
 </body>
 </html>

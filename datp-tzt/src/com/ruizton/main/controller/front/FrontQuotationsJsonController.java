@@ -1,24 +1,17 @@
 package com.ruizton.main.controller.front;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
-
 import javax.servlet.http.HttpServletRequest;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.ruizton.main.auto.KlinePeriodData;
 import com.ruizton.main.auto.OneDayData;
 import com.ruizton.main.auto.RealTimeData;
@@ -36,6 +29,14 @@ import com.ruizton.util.Comm;
 import com.ruizton.util.Utils;
 
 
+
+/**
+ * @author   Dylan
+ * @data     2018年8月9日
+ * @typeName FrontQuotationsJsonController
+ * 说明 ：该类实现了前台交易信息列表的查询功能
+ *
+ */
 @Controller
 public class FrontQuotationsJsonController extends BaseController {
 	@Autowired
@@ -268,6 +269,27 @@ public class FrontQuotationsJsonController extends BaseController {
 //	}
 //	
 	
+	
+	
+	
+	/**
+	 *  
+	 *  作者：           Dylan
+	 *  标题：           indexmarket 
+	 *  时间：           2018年8月9日
+	 *  描述：           实现前台交易数据的输出
+	 *  1.查询出所有可以交易的币种信息 fvirtualcointypes
+	 *  2.获取24小时开盘价 s
+	 *  3.获取最新价 last
+	 *  @param request
+	 *  @param totalAmt 
+	 *  @param price
+	 *  @param total
+	 *  @param rose
+	 *  @param current
+	 *  @param keyWord
+	 *  @return 返回utf-8 格式的json串
+	 */
 	@ResponseBody
 	@RequestMapping(value="/real/indexmarket",produces={JsonEncode})
 	public String indexmarket(HttpServletRequest request,
@@ -276,18 +298,21 @@ public class FrontQuotationsJsonController extends BaseController {
 			@RequestParam(required=false,defaultValue="")String total,
 			@RequestParam(required=false,defaultValue="")String rose,
 			@RequestParam(required=false,defaultValue="1")int current,
-			@RequestParam(required=false,defaultValue="")String keyWord
-			){
-	
+			@RequestParam(required=false,defaultValue="")String keyWord){
+		
 		JSONObject jsonObject = new JSONObject() ;
 		List<JSONObject> list = new ArrayList<>();
 		//TreeSet<Object> treeSet = new TreeSet<>();
+		
+		//从缓存中取出所有虚拟币类型
 		List<Fvirtualcointype> fvirtualcointypes = (List)this.constantMap.get("virtualCoinType");
 		for (Fvirtualcointype fvirtualcointype : fvirtualcointypes) {
-			if(!fvirtualcointype.isFisShare())
+			//判断币种是否可以交易
+			if(!fvirtualcointype.isFisShare()) 
 			{
 				continue;
 			}
+			
 			JSONObject js = new JSONObject() ;
 			js.accumulate("id", fvirtualcointype.getFid());
 			js.accumulate("name", fvirtualcointype.getFname());
@@ -309,6 +334,7 @@ public class FrontQuotationsJsonController extends BaseController {
 //			js.accumulate("istrade", Utils.openTrade(fvirtualcointype));
 			double s = this.oneDayData.get24Price(fvirtualcointype.getFid());
 //			double s7 = -8888d;
+			//获取交易记录
 			List<Ftradehistory> ftradehistorys = (List<Ftradehistory>)constantMap.get("tradehistory");
 			for (Ftradehistory ftradehistory : ftradehistorys) {
 				if(ftradehistory.getFvid() == fvirtualcointype.getFid()){
@@ -383,7 +409,6 @@ public class FrontQuotationsJsonController extends BaseController {
 				try{
 				// 最新成交价升序排序
 				Collections.sort(list, new Comparator<JSONObject>() {
-
 					@Override
 					public int compare(JSONObject o1, JSONObject o2) {
 						double price1 = (double) o1.get("price");
@@ -394,7 +419,6 @@ public class FrontQuotationsJsonController extends BaseController {
 							return 0;
 						else
 							return 1;
-
 					}
 				});
 				} catch (Exception e) {

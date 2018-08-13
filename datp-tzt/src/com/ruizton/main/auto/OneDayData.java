@@ -21,20 +21,30 @@ public class OneDayData {
 	private Map<String, Double> lowestPrize24 = new HashMap<String, Double>() ;
 	private Map<String, Double> highestPrize24 = new HashMap<String, Double>() ;
 	private Map<String, Double> totalDeal24 = new HashMap<String, Double>() ;
-	private Map<String, Double> start24Price = new HashMap<String, Double>() ;
+	private Map<String, Double> start24Price = new HashMap<String, Double>() ; 
 	private Map<String, Double> totalRMB24 = new HashMap<String, Double>() ;
 	
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           get24Price 
+	 *  时间：           2018年8月9日
+	 *  描述：          从缓存中获取24小时开始价格 开盘价  
+	 *  
+	 *  @param id
+	 *  @return double
+	 */
 	public double get24Price(String id) {
 		Double f=null;
 		if(Comm.getISREDIS())
 		{
-		String fStr=redisService.get("start24Price"+id);
-		if(fStr!=null&!fStr.equals(""))
-		{
-		f=Double.parseDouble(fStr);
-		}
+			String fStr=redisService.get("start24Price"+id);
+			if(fStr!=null&!fStr.equals(""))
+			{
+				f=Double.parseDouble(fStr);
+			}
 		}else{
-		 f = this.start24Price.get(id) ;
+			f = this.start24Price.get(id) ;
 		}
 		if(f==null){
 			return 0F ;
@@ -114,6 +124,13 @@ public class OneDayData {
 		}
 	}
 	
+	
+	
+	
+	
+	
+	
+	
 	public synchronized void putLowest(String id,double f){
 		if (!Comm.getISREDIS()) {
 			this.lowestPrize24.put(id, f) ;
@@ -143,7 +160,7 @@ public class OneDayData {
 		{
 			redisService.saveKey("start24Price"+id, Double.toString(f));
 		}else{
-		this.start24Price.put(id, f) ;
+			this.start24Price.put(id, f) ;
 		}
 	}
 	public synchronized void put24Total(String id,double f){

@@ -173,14 +173,24 @@ public class ConstantMap {
 		map.put(key, value);
 		}
 	}
-
+	
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           get 
+	 *  时间：           2018年8月9日
+	 *  描述：           从redis中获取key为ConstantMap中的列
+	 *         redis中使用的是hash存储 根据key为ConstantMap取出存在hash中的列key
+	 *  @param key 
+	 *  @return
+	 */
 	public Object get(String key) {
-		if (Comm.getISREDIS()) {
-		String conStr=	redisService.hget("ConstantMap", key);
-		Object obj=ObjectTranscoder.deserializeByString(conStr);
-		return obj;
+		if (Comm.getISREDIS()) {//判断redis是否开启 由comm.properties中进行配置
+			String conStr=	redisService.hget("ConstantMap", key);
+			Object obj=ObjectTranscoder.deserializeByString(conStr);
+			return obj;
 		} else {
-		return map.get(key);
+			return map.get(key);
 		}
 	}
 

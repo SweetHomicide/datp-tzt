@@ -1,9 +1,5 @@
 @charset "utf-8";
 /****com****/
-.gray-bg{
-	background: #262a42 ;
-	color: #a7b6c8;
-	}
 .index .split {
 	height: .5rem;
 	width: 5em;
@@ -15,7 +11,7 @@
 }
 /****行情*****/
 .market {
-	background: #262a42;
+	background: #fff;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
@@ -127,51 +123,11 @@
 	border-left: 10px solid #fff;
 }
 /*****about*******/
- .bg{
-	margin-top: 30px;
-}
- .bg .row{
-	padding: 60px 0;
-}
- .bg .bg-t{
-	padding-left: 60px;
-}
- .bg .bg-t h2{
-    padding-bottom: 30px;
-    color: #c7cce6;
-    font-size: 34px;
-    font-weight: 400;
-    text-align: left;	
-}
- .bg .bg-t p{
-	line-height: 42px;
-	color: #a7b6c8;
-	text-align: left;
-    max-width: 500px;
-    font-size: 22px;
-}
- .bg .bg-p {
-	text-align: center;
-}
- .bg .bg-p img{
-	min-width: 366px;
-    height: 353px;	
-    display: inline-block;
-}
-/*.input-group .input{
-	background: #1e2235;
-	color: #c7cce6;
-	border-color: #4e5b85;
-}*/
-/*.input-group .btn {
-	background: #1e2235;
-	border-color: #4e5b85;
-}*/
 .about {
 	position: relative;
 	/* background: #fafafa; */
-	/*background: #262a42;*/
-	/*border-top:solid 1px #eeebeb;*/
+	background: #ffffff;
+	border-top:solid 1px #eeebeb;
 	padding-top:30px;
 }
 
@@ -232,12 +188,12 @@
 
 .about .security {
 	/* background: url("../../images/index/indexplist.png") no-repeat 8px 0; */
-	background: url("../../images/index/tu_01.png"/*tpa=http://www.iexchg.com/static/front/images/index/tu_01.png*/) no-repeat;
+	background: url("../../images/index/tu_01.png") no-repeat;
 	
 }
 
 .about .professional {
-	background: url("../../images/index/tu_03.png"/*tpa=http://www.iexchg.com/static/front/images/index/tu_03.png*/) no-repeat;
+	background: url("../../images/index/tu_03.png") no-repeat;
 	/* background: url("../../images/index/indexplist.png") no-repeat -200px
 		0px; */
 }
@@ -246,7 +202,7 @@
 	
 	/* background: url("../../images/index/indexplist.png") no-repeat -431px
 		0px; */
-	background: url("../../images/index/tu_02.png"/*tpa=http://www.iexchg.com/static/front/images/index/tu_02.png*/) no-repeat;
+	background: url("../../images/index/tu_02.png") no-repeat;
 }
 /********news***********/
 .news {
@@ -260,21 +216,21 @@
 	width:300px;
 	height:200px;
 	/* border:1px solid #000; */
-	background: url("../../images/index/zx01.jpg"/*tpa=http://www.iexchg.com/static/front/images/index/zx01.jpg*/)  no-repeat;
+	background: url("../../images/index/zx01.jpg")  no-repeat;
 	margin:10px auto;
 }
  .advisory{
 	width:300px;
 	height:200px;
 	/* border:1px solid #000; */
-	background: url("../../images/index/zx02.jpg"/*tpa=http://www.iexchg.com/static/front/images/index/zx02.jpg*/)  no-repeat;
+	background: url("../../images/index/zx02.jpg")  no-repeat;
 	margin:10px auto;
 }
  .information{
 	width:300px;
 	height:200px;
 	/* border:1px solid #000; */
-	background: url("../../images/index/zx03.jpg"/*tpa=http://www.iexchg.com/static/front/images/index/zx03.jpg*/)  no-repeat;
+	background: url("../../images/index/zx03.jpg")  no-repeat;
 	margin:10px auto;
 }
 /*产品介绍  */
@@ -282,7 +238,7 @@
 	width:300px;
 	height:200px;
 	/* border:1px solid #000; */
-	background: url("../../images/index/cp.jpg"/*tpa=http://www.iexchg.com/static/front/images/index/cp.jpg*/)  no-repeat;
+	background: url("../../images/index/cp.jpg")  no-repeat;
 	margin:10px auto;
 }
 
@@ -290,7 +246,7 @@
 	width:300px;
 	height:200px;
 	/* border:1px solid #000; */
-	background: url("../../images/index/zc.jpg"/*tpa=http://www.iexchg.com/static/front/images/index/zc.jpg*/)  no-repeat;
+	background: url("../../images/index/zc.jpg")  no-repeat;
 	margin:10px auto;
 }
 
@@ -298,7 +254,7 @@
 	width:300px;
 	height:200px;
 	/* border:1px solid #000; */
-	background: url("../../images/index/jys.jpg"/*tpa=http://www.iexchg.com/static/front/images/index/jys.jpg*/)  no-repeat;
+	background: url("../../images/index/jys.jpg")  no-repeat;
 	margin:10px auto;
 }
 
@@ -310,7 +266,7 @@
 	padding-top: 60px;
 	padding-bottom: 60px;
 	border-top: #eee solid 1px;
-	background: url("../../images/index/callinfo-bg.png"/*tpa=http://www.iexchg.com/static/front/images/index/callinfo-bg.png*/) no-repeat 50% 50%;
+	background: url("../../images/index/callinfo-bg.png") no-repeat 50% 50%;
 }
 
 .contact-con {
@@ -341,30 +297,30 @@
 }
 
 .contact-con .icon-iten .icon.qq {
-	background: url("../../images/index/indexplist.png"/*tpa=http://www.iexchg.com/static/front/images/index/indexplist.png*/) no-repeat 0 -450px;
+	background: url("../../images/index/indexplist.png") no-repeat 0 -450px;
 }
 
 .contact-con .icon-iten .icon.phone {
-	background: url("../../images/index/indexplist.png"/*tpa=http://www.iexchg.com/static/front/images/index/indexplist.png*/) no-repeat -198px
+	background: url("../../images/index/indexplist.png") no-repeat -198px
 		-450px;
 }
 
 .contact-con .icon-iten .icon.app {
-	background: url("../../images/index/indexplist.png"/*tpa=http://www.iexchg.com/static/front/images/index/indexplist.png*/) no-repeat -399px
+	background: url("../../images/index/indexplist.png") no-repeat -399px
 		-450px;
 }
 
 .contact-con .icon-iten .icon.weibo {
-	background: url("../../images/index/indexplist.png"/*tpa=http://www.iexchg.com/static/front/images/index/indexplist.png*/) no-repeat 0 -640px;
+	background: url("../../images/index/indexplist.png") no-repeat 0 -640px;
 }
 
 .contact-con .icon-iten .icon.wechat {
-	background: url("../../images/index/indexplist.png"/*tpa=http://www.iexchg.com/static/front/images/index/indexplist.png*/) no-repeat -198px
+	background: url("../../images/index/indexplist.png") no-repeat -198px
 		-640px;
 }
 
 .contact-con .icon-iten .icon.email {
-	background: url("../../images/index/indexplist.png"/*tpa=http://www.iexchg.com/static/front/images/index/indexplist.png*/) no-repeat -399px
+	background: url("../../images/index/indexplist.png") no-repeat -399px
 		-640px;
 }
 
@@ -431,7 +387,7 @@
 	width: 135px;
 	height: 135px;
 	display: inline-block;
-	background: url("../../images/index/indexplist.png"/*tpa=http://www.iexchg.com/static/front/images/index/indexplist.png*/) no-repeat 0 -810px;
+	background: url("../../images/index/indexplist.png") no-repeat 0 -810px;
 }
 
 .contact-con p {
@@ -443,7 +399,7 @@
 	padding-top: 50px;
 	background: #de5b4d;
 	color: #fff;
-	background: url("../../images/index/index-info.png"/*tpa=http://www.iexchg.com/static/front/images/index/index-info.png*/) no-repeat 50% 50%;
+	background: url("../../images/index/index-info.png") no-repeat 50% 50%;
 }
 
 .info-con {
@@ -468,7 +424,7 @@
 }
 
 .showinfo .showinfo-img {
-	background: url("../../images/index/index-showinfo.jpg"/*tpa=http://www.iexchg.com/static/front/images/index/index-showinfo.jpg*/) no-repeat 0 0;
+	background: url("../../images/index/index-showinfo.jpg") no-repeat 0 0;
 	height: 489px;
 	width: 573px;
 	display: inline-block;
@@ -492,8 +448,8 @@
 .login {
 	width: 24.5em;
 	position: absolute;
-    top: 24em;
-    right: -5em;
+	top: 5em;
+	right: 0;
 	/* color: #004080; */
 	color:#ffffff;
 }
@@ -672,21 +628,21 @@
 }
 
 .help_list li .help_fixed {
-	background: url("../../images/index/fixed_help.png"/*tpa=http://www.iexchg.com/static/front/images/index/fixed_help.png*/) 0% 0% no-repeat;
+	background: url("../../images/index/fixed_help.png") 0% 0% no-repeat;
 	background-color: #282828;
 	opacity: .5;
 	filter: alpha(opacity =             50);
 }
 
 .help_list li .help_udesk {
-	background: url("../../images/index/help_udesk.png"/*tpa=http://www.iexchg.com/static/front/images/index/help_udesk.png*/) 0% 0% no-repeat;
+	background: url("../../images/index/help_udesk.png") 0% 0% no-repeat;
 	background-color: #282828;
 	opacity: .5;
 	filter: alpha(opacity =             50);
 }
 
 .help_list li .tel_fixed {
-	background: url("../../images/index/fixed_tel.png"/*tpa=http://www.iexchg.com/static/front/images/index/fixed_tel.png*/) 0% 0% no-repeat;
+	background: url("../../images/index/fixed_tel.png") 0% 0% no-repeat;
 	background-color: #282828;
 	opacity: .5;
 	filter: alpha(opacity =             50);
@@ -706,7 +662,7 @@
 	float: left;
 	font-size: 12px;
 	color: #e10;
-	background: url("../../images/note.png"/*tpa=http://www.iexchg.com/static/front/images/note.png*/) left center no-repeat;
+	background: url(/static/front/images/note.png) left center no-repeat;
 	padding-left: 20px;
 	line-height: 25px;
 }
@@ -730,7 +686,7 @@
 	float: left;
 	font-size: 12px;
 	color: #e10;
-	background: url("../../images/note.png"/*tpa=http://www.iexchg.com/static/front/images/note.png*/) left center no-repeat;
+	background: url(/static/front/images/note.png) left center no-repeat;
 	padding-left: 20px;
 	line-height: 25px;
 }
@@ -790,7 +746,7 @@
 }
 
 .notice-item-icon {
-	background: url("../../images/comm/commplist.png"/*tpa=http://www.iexchg.com/static/front/images/comm/commplist.png*/) 0 -1220px no-repeat;
+	background: url(../../images/comm/commplist.png) 0 -1220px no-repeat;
 	width: 50px;
 	height: 19px;
 }
@@ -817,14 +773,14 @@
 	vertical-align:middle;
 	width:50px;
 	height:40px;
-	background: url("../../images/index/warn.png"/*tpa=http://www.iexchg.com/static/front/images/index/warn.png*/) no-repeat;
+	background: url(../../images/index/warn.png) no-repeat;
 	margin-right:-25px;
 
 }
 
 .wea {
 	font-size: 14px;
-	color: #a7b6c8;/* #ff8888; */
+	color: #000000;/* #ff8888; */
 /* 	padding-right: 17px; */
 	/* line-height: 20px; */
 }
@@ -952,7 +908,7 @@
 }
 
 .totop_list li .totop_fixed {
-	background: url("../../images/index/totop.png"/*tpa=http://www.iexchg.com/static/front/images/index/totop.png*/) 0% 0% no-repeat;
+	background: url("../../images/index/totop.png") 0% 0% no-repeat;
 	background-color: #282828;
 	opacity: .5;
 	filter: alpha(opacity =             50);
@@ -991,49 +947,48 @@
 	margin:12px auto;
 	width:70px;
 	height:60px;
-	background: url("../../images/index/icon_01.png"/*tpa=http://www.iexchg.com/static/front/images/index/icon_01.png*/) center center no-repeat;
+	background: url("../../images/index/icon_01.png") center center no-repeat;
 	background-size:contain;
 }
 .icon-authentication{
 	margin:12px auto;
 	width:70px;
 	height:60px;
-	background: url("../../images/index/icon_02.png"/*tpa=http://www.iexchg.com/static/front/images/index/icon_02.png*/) center center no-repeat;
+	background: url("../../images/index/icon_02.png") center center no-repeat;
 	background-size:contain;
 }
 .icon-recharge{
 	margin:12px auto;
 	width:70px;
 	height:60px;
-	background: url("../../images/index/icon_03.png"/*tpa=http://www.iexchg.com/static/front/images/index/icon_03.png*/) center center no-repeat;
+	background: url("../../images/index/icon_03.png") center center no-repeat;
 	background-size:contain;
 }
 .icon-Crowd{
 	margin:12px auto;
 	width:70px;
 	height:60px;
-	background: url("../../images/index/icon_05.png"/*tpa=http://www.iexchg.com/static/front/images/index/icon_05.png*/) center center no-repeat;
+	background: url("../../images/index/icon_05.png") center center no-repeat;
 	background-size:contain;
 }
 .icon-exchange{
 	margin:12px auto;
 	width:70px;
 	height:60px;
-	background: url("../../images/index/icon_04.png"/*tpa=http://www.iexchg.com/static/front/images/index/icon_04.png*/) center center no-repeat;
+	background: url("../../images/index/icon_04.png") center center no-repeat;
 	background-size:contain;
 }
 .icon-transaction{
 	margin:12px auto;
 	width:70px;
 	height:60px;
-	background: url("../../images/index/icon_06.png"/*tpa=http://www.iexchg.com/static/front/images/index/icon_06.png*/) center center no-repeat;
+	background: url("../../images/index/icon_06.png") center center no-repeat;
 	background-size:contain;
 }
 #row-value{
 	text-align:center;
 	vertical-align: middle;
 	font-size:14px;
-	    border: 1px solid #4e5b85;
 }
 #row-value a{
 	color:#da2e22;
@@ -1084,36 +1039,3 @@
 	cursor: pointer;
 }
 
-.title{
-    padding: 0 15px;	
-	}
-.title .kind{
-    line-height: 40px;
-    border: 1px solid #4e5b85;
-    border-right: none;
-    text-align: center;
-    font-size: 15px;	
-    color: #c7cce6;
-    background: #202437;
-    margin-bottom: -1px;
-    cursor: pointer;
-	}
-.title .kind img{
-	width: 22px;
-    margin-right: 10px;
-    vertical-align: middle;
-    margin-top: -4px;
-}
-.index .table-striped>tbody>tr {
-    background-color: #202437 ;
-    border: 1px solid #4e5b85;
-}
-.table-striped>tbody>tr>td {
-       border-top: 1px solid rgba(100,100,100,.3);
-}
-.title .active{
-	border-bottom: 1px solid #202437;
-}
-#row-value .btp{
-	border-top: 1px solid #4e5b85;
-}

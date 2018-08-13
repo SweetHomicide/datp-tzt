@@ -2,13 +2,11 @@ package com.ruizton.main.model;
 // default package
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,7 +16,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * Ftradehistory entity. @author MyEclipse Persistence Tools
+ * @author   Dylan
+ * @data     2018年8月9日
+ * @typeName Ftradehistory
+ * 说明 ： 交易记录表  对应的是Fvirtualcointype币种类型表
+ *
  */
 @Entity
 @Table(name = "ftradehistory")
@@ -30,7 +32,7 @@ public class Ftradehistory implements java.io.Serializable {
 	private String fid;
 	private Date fdate;
 	private Double fprice;
-	private String fvid;//lwj
+	private String fvid;//lwj   对应的是Fvirtualcointype表中的id 
 	private Double ftotal;
 //	private Fuser fuser;
 

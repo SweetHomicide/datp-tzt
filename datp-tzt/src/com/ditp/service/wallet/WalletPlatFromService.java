@@ -1,11 +1,9 @@
 package com.ditp.service.wallet;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +31,10 @@ import com.wallet.platfrom.sdk.ProcessResult;
 import com.wallet.platfrom.sdk.WalletPlatfromConfig;
 import com.wallet.platfrom.sdk.beans.WithdrawDataBean;
 /**
- * 钱包服务
- * @author liuruichen
+ * @author   Dylan
+ * @data     2018年8月11日
+ * @typeName WalletPlatFromService
+ * 说明 ：钱包服务
  *
  */
 @Service
@@ -65,8 +65,13 @@ public class WalletPlatFromService implements IWalletPlatfromInterface {
 	
 	public static WalletPlatfromConfig CONFIG=new WalletPlatfromConfig();
 	static{
-		CONFIG.setPrivateKeyFile("/usr/local/iexchg/keyfile/private-iexchg.key");
-	    CONFIG.setPublicKeyFile("/usr/local/iexchg/keyfile/public-wallet.key");
+//		CONFIG.setPrivateKeyFile("/usr/local/iexchg/keyfile/private-iexchg.key");
+//	    CONFIG.setPublicKeyFile("/usr/local/iexchg/keyfile/public-wallet.key");
+		
+		
+	    
+	    CONFIG.setPrivateKeyFile("/Work/SoftwareRuntime/tzt-wallet/keyfile/private-wallet.key");
+	    CONFIG.setPublicKeyFile("/Work/SoftwareRuntime/tzt-wallet/keyfile/public-tzt.key");
 	}
 	
 	/**
@@ -345,7 +350,7 @@ public class WalletPlatFromService implements IWalletPlatfromInterface {
 
 			}
 		}else{
-			return -2;
+			return -2;//交易所没有上币
 		}
 		//查询条件
 

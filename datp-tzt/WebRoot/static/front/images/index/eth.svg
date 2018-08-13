@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500px" height="500px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 40</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#B5BEE2" offset="0%"></stop>
+            <stop stop-color="#7E89C1" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页夜间版" transform="translate(-420.000000, -982.000000)">
+            <g id="Group-55" transform="translate(51.000000, 972.000000)">
+                <g id="Group-69" transform="translate(1.000000, 0.000000)">
+                    <g id="Group-74" transform="translate(318.000000, 0.000000)">
+                        <g id="Group-23" transform="translate(50.000000, 10.000000)">
+                            <g id="Group-40">
+                                <path d="M11,0 C4.92487182,0 0,4.92487182 0,11 C0,17.0751282 4.92487182,22 11,22 C17.0751282,22 22,17.0751282 22,11 C22,4.92487182 17.0751282,0 11,0 Z" id="Shape" fill="url(#linearGradient-1)" fill-rule="nonzero" opacity="0.7"></path>
+                                <polygon id="Path" fill="#FFFFFF" points="10.8395066 18.257674 6.49959471 12.1186079 10.8395066 14.6595595"></polygon>
+                                <polygon id="Path" fill="#FFFFFF" points="10.8395066 13.7597885 6.47022907 11.2004229 10.8395066 9.28651982"></polygon>
+                                <polygon id="Path" fill="#FFFFFF" points="10.8395066 8.97900441 6.61095154 10.8310749 10.8395066 3.72652863"></polygon>
+                                <polygon id="Path" fill="#FFFFFF" points="11.1211454 3.72439648 15.4091101 10.8574361 11.1211454 8.97900441 11.1211454 3.72439648"></polygon>
+                                <polygon id="Path" fill="#FFFFFF" points="11.1211454 18.257674 11.1211454 14.6595595 15.4610573 12.1186079 11.1211454 18.257674"></polygon>
+                                <polygon id="Path" fill="#FFFFFF" points="11.1211454 13.7598855 11.1211454 9.28661674 15.4936211 11.2018767 11.1211454 13.7598855"></polygon>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
