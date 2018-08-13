@@ -2,13 +2,12 @@ package com.ruizton.main.service.front;
 
 import java.util.List;
 
-import org.hibernate.dialect.FirebirdDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ruizton.main.Enum.VirtualCapitalOperationTypeEnum;
 import com.ruizton.main.Enum.VirtualCapitalOperationInStatusEnum;
 import com.ruizton.main.Enum.VirtualCapitalOperationOutStatusEnum;
+import com.ruizton.main.Enum.VirtualCapitalOperationTypeEnum;
 import com.ruizton.main.Enum.VirtualCoinTypeStatusEnum;
 import com.ruizton.main.dao.FfeesDAO;
 import com.ruizton.main.dao.FsystemargsDAO;
@@ -18,8 +17,6 @@ import com.ruizton.main.dao.FvirtualcaptualoperationDAO;
 import com.ruizton.main.dao.FvirtualcointypeDAO;
 import com.ruizton.main.dao.FvirtualwalletDAO;
 import com.ruizton.main.model.Ffees;
-import com.ruizton.main.model.Fsubscription;
-import com.ruizton.main.model.Fsystemargs;
 import com.ruizton.main.model.Fuser;
 import com.ruizton.main.model.Fvirtualaddress;
 import com.ruizton.main.model.FvirtualaddressWithdraw;
@@ -28,6 +25,13 @@ import com.ruizton.main.model.Fvirtualcointype;
 import com.ruizton.main.model.Fvirtualwallet;
 import com.ruizton.util.Utils;
 
+/**
+ * @author   Dylan
+ * @data     2018年8月14日
+ * @typeName FrontVirtualCoinService
+ * 说明 ：币种信息业务层
+ *
+ */
 @Service
 public class FrontVirtualCoinService {
 	@Autowired
@@ -50,6 +54,16 @@ public class FrontVirtualCoinService {
 		return list ;
 	}
 	
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           findFvirtualCoinById 
+	 *  时间：           2018年8月14日
+	 *  描述：           根据币种id获取币种信息
+	 *  	          使用hibernate的get方法获取数据库信息 区别与load方法 会直接实例化查找的对象
+	 *  @param id 币种id
+	 *  @return Fvirtualcointype 币种信息
+	 */
 	public Fvirtualcointype findFvirtualCoinById(String id){
 		Fvirtualcointype fvirtualcointype = this.fvirtualcointypeDAO.findById(id) ;
 		return fvirtualcointype ;
@@ -58,7 +72,7 @@ public class FrontVirtualCoinService {
 	public Fvirtualcointype findFirstFirtualCoin(int type){
 		Fvirtualcointype fvirtualcointype = null ;
 		String filter ="where fstatus="+VirtualCoinTypeStatusEnum.Normal+" and fisShare=1";
-		if(type !=0){
+		if(type !=0){//可以交易
 			filter = filter +" and ftype="+type;
 		}
 		List<Fvirtualcointype> list = this.fvirtualcointypeDAO.list(0, 0, filter, false);

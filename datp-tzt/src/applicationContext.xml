@@ -117,7 +117,7 @@
 	<bean id="validateMap" class="com.ruizton.main.comm.ValidateMap" scope="singleton"></bean>
 	<bean id="taskList" class="com.ruizton.main.auto.TaskList" scope="singleton" init-method="init"/>
 	
-	<!-- tasks Spring 定时任务的实现方式--Timer和TimerTask  -->
+	<!-- tasks Spring 定时任务的实现方式  Timer和TimerTask  -->
 	<bean class="com.ruizton.main.auto.AutoSendMessage" id="sendMessageTask"></bean>
 	<bean class="com.ruizton.main.auto.AutoSendMail" id="sendMailTask"></bean>
 	

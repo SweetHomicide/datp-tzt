@@ -75,44 +75,51 @@ public class FrontTradeController extends BaseController {
 	 *  描述：           去交易 跳转到交易详情页面
 	 *  
 	 *  @param request
-	 *  @param coinType 
-	 *  @param tradeType
+	 *  @param coinType  币种ID
+	 *  @param tradeType 交易类型
 	 *  @return 
 	 *  @throws Exception
 	 */
 	@RequestMapping("/trade/coin")
 	public ModelAndView coin(HttpServletRequest request,
 			@RequestParam(required=false,defaultValue="0")String coinType,//VirtualCoinTypeEnum
-			@RequestParam(required=false,defaultValue="0")int tradeType
-			) throws Exception{
+			@RequestParam(required=false,defaultValue="0")int tradeType) throws Exception{
+		
 		String currentPage="1";//页码
 		int pageSize = Comm.getPAGE_NUM();
 		int limitNum = (Integer.valueOf(currentPage)-1)*pageSize;
 		String filter = " and fisShare=1";
+		//查询出可以交易的币种类集合
 		List<Fvirtualcointype> fList = this.frontVirtualCoinService.findByParam(limitNum, pageSize, filter);
+		//查询有效币种数量 count
 		String sql = "select count(*) from Fvirtualcointype where fstatus=1"+ filter;
 		int count = this.frontVirtualCoinService.findCount(sql);
+		//分页
 		String pagin = this.generatePagin1(count/pageSize+( (count%pageSize)==0?0:1), Integer.valueOf(currentPage)) ;
 		ModelAndView modelAndView = new ModelAndView() ;
 		//modelAndView.addObject("count", count);
-		String userid = null;
-		Fuser fuser = null;
-		boolean isTelephoneBind =false;
-		boolean fpostRealValidate=false;
+		String userid = null;//用户id 从session中获取
+		Fuser fuser = null;//系统用户
+		boolean isTelephoneBind =false; //是否绑定手机
+		boolean fpostRealValidate=false;//是否已经提交身份认证
+		//判断用户是否为null
 		if(GetSession(request) != null){
 			fuser = this.userService.findById(GetSession(request).getFid());
 			userid = fuser.getFid();
-			isTelephoneBind = fuser.isFisTelephoneBind();
-			fpostRealValidate=fuser.getFpostRealValidate();
+			isTelephoneBind 	= fuser.isFisTelephoneBind();
+			fpostRealValidate	= fuser.getFpostRealValidate();
 		}
 		
-		
+		//交易类型
 		tradeType = tradeType < 0? 0: tradeType ;
 		tradeType = tradeType > 1? 1: tradeType ;
-		
+		//根据币种id获取币种信息
 		Fvirtualcointype fvirtualcointype = this.frontVirtualCoinService.findFvirtualCoinById(coinType) ;
-		if(fvirtualcointype==null ||fvirtualcointype.getFstatus()==VirtualCoinTypeStatusEnum.Abnormal
-				 ||!fvirtualcointype.isFisShare()){
+		//如果不可以交易
+		if(fvirtualcointype==null 
+				 || fvirtualcointype.getFstatus()==VirtualCoinTypeStatusEnum.Abnormal
+				 || !fvirtualcointype.isFisShare()){
+			
 			fvirtualcointype = this.frontVirtualCoinService.findFirstFirtualCoin(0) ;
 			if(fvirtualcointype==null){
 				modelAndView.setViewName("redirect:/") ;

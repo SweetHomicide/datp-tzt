@@ -63,7 +63,18 @@ public class FvirtualcointypeDAO extends HibernateDaoSupport {
 			throw re;
 		}
 	}
-
+	
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           findById 
+	 *  时间：           2018年8月14日
+	 *  描述：           根据币种id查询币种信息
+	 *  	          使用hibernate的get方法获取数据库中的数据 区别与load方法
+	 *  
+	 *  @param id
+	 *  @return Fvirtualcointype
+	 */
 	public Fvirtualcointype findById(java.lang.String id) {
 		log.debug("getting Fvirtualcointype instance with id: " + id);
 		try {

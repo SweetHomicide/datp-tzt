@@ -83,7 +83,16 @@ public class BaseController {
 		return request.getSession();
 	}
 
-	// 获取用户
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           getFuserSession 
+	 *  时间：           2018年8月14日
+	 *  描述：           1.从cookie中获取sessionID
+	 *  	   2.根据sessionID去redis中获取用户信息
+	 *  @param request
+	 *  @return Fuser
+	 */
 	public Fuser getFuserSession(HttpServletRequest request) {
 		String sessionid = getCookie(request, "sessionId");
 		if (!sessionid.equals("")) {
@@ -113,16 +122,26 @@ public class BaseController {
 		return fadmin;
 	}
 
-	// 获得session中的用户
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           GetSession 
+	 *  时间：           2018年8月14日
+	 *  描述：           获取session中的用户
+	 *  	   1.如果redis没有开启 则从request中获取session 然后从session中获取用户
+	 *  	   2.如果redis开启 则调用getFuserSession 从cookie中获取sessionid 根据sessionid去缓存中拿用户信息
+	 *  @param request 
+	 *  @return Fuser
+	 */
 	public Fuser GetSession(HttpServletRequest request) {
 		Fuser fuser = null;
-		if (!Comm.getISREDIS()) {
-			HttpSession session = getSession(request);
+		if (!Comm.getISREDIS()) {//没有开启
+			HttpSession session = getSession(request);//从request中获取session
 			Object session_user = session.getAttribute("login_user");
 			if (session_user != null) {
 				fuser = (Fuser) session_user;
 			}
-		} else {
+		} else {//从cookie中获取session再去redis中拿用户信息
 			fuser = getFuserSession(request);
 		}
 
@@ -183,6 +202,17 @@ public class BaseController {
 		}
 	}
 
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           getCookie 
+	 *  时间：           2018年8月14日
+	 *  描述：           从cookie中获取sessionID
+	 *  
+	 *  @param request
+	 *  @param key
+	 *  @return cookieValue 
+	 */
 	public String getCookie(HttpServletRequest request, String key) {
 		String cookieValue = "";
 		Cookie[] cookies = request.getCookies();

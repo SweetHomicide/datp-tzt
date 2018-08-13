@@ -31,10 +31,9 @@ import com.ruizton.main.Enum.VirtualCoinTypeStatusEnum;
 public class Fvirtualcointype implements java.io.Serializable {
 
 	// Fields
-
 	private String fid;
 	private int fid_s;
-	private boolean fisShare;// 是否可以交易
+	private boolean fisShare;// 是否可以交易   1为可以交易  
 	private boolean FIsWithDraw;// 是否可以充值提现
 	private String fname;//币种名称
 	private String fShortName;//简写名称
@@ -51,12 +50,12 @@ public class Fvirtualcointype implements java.io.Serializable {
 	private double higestBuyPrize;//最高买入
 	private double lowestSellPrize;//最低卖出
 	private boolean canLend;// 是否可以借贷
-	private boolean fisDefAsset;// 是否是默认资产   0不是  1是 
+	private boolean fisDefAsset;// 是否是默认资产   0不是  1是
+	
 	private Set<Ffees> ffees = new HashSet<Ffees>(0);
 	private Set<Fentrustplan> fentrustplans = new HashSet<Fentrustplan>(0);
 	private Set<Fentrust> fentrusts = new HashSet<Fentrust>(0);
-	private Set<Fvirtualcaptualoperation> fvirtualcaptualoperations = new HashSet<Fvirtualcaptualoperation>(
-			0);
+	private Set<Fvirtualcaptualoperation> fvirtualcaptualoperations = new HashSet<Fvirtualcaptualoperation>(0);
 	private Set<Fvirtualwallet> fvirtualwallets = new HashSet<Fvirtualwallet>(0);
 	private int version;
 	private String furl;
@@ -322,7 +321,17 @@ public class Fvirtualcointype implements java.io.Serializable {
 	public void setFid_s(int fid_s) {
 		this.fid_s = fid_s;
 	}
-
+	
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           isFisShare 
+	 *  时间：           2018年8月14日
+	 *  描述：          币种是否可以交易  
+	 *  	   true  可以
+	 *  	   false 不可以         
+	 *  @return boolean
+	 */
 	@Column(name = "fisShare")
 	public boolean isFisShare() {
 		return fisShare;

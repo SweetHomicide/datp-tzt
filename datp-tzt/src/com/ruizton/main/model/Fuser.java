@@ -22,11 +22,14 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.ruizton.main.Enum.IdentityTypeEnum;
 import com.ruizton.main.Enum.RegTypeEnum;
-import com.ruizton.main.Enum.UserGradeEnum;
 import com.ruizton.main.Enum.UserStatusEnum;
 
 /**
- * Fuser entity. @author MyEclipse Persistence Tools
+ * @author   Dylan
+ * @data     2018年8月14日
+ * @typeName Fuser
+ * 说明 ：系统用户表
+ *
  */
 @Entity
 @Table(name = "fuser")
@@ -34,7 +37,6 @@ import com.ruizton.main.Enum.UserStatusEnum;
 public class Fuser implements java.io.Serializable {
 
 	// Fields
-
 	private String fid;
 	private Fwallet fwallet;
 	private String floginName;

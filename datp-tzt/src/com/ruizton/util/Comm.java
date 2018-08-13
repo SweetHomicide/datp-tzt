@@ -125,6 +125,15 @@ public final class Comm {
 	    		return BACKURL;
 	    	}
 	    	
+	    	/**
+	    	 * 
+	    	 *  作者：           Dylan
+	    	 *  标题：           getISREDIS 
+	    	 *  时间：           2018年8月14日
+	    	 *  描述：           是否开启redis缓存
+	    	 *  
+	    	 *  @return true 开启  false 关闭 
+	    	 */
 	    	public static boolean getISREDIS() {
 	    		return ISREDIS;
 	    	}
