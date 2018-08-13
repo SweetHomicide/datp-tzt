@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mysql.jdbc.log.Log;
 import com.ruizton.main.Enum.ValidateMessageStatusEnum;
 import com.ruizton.main.model.Fvalidatemessage;
 import com.ruizton.main.service.front.FrontSystemArgsService;

@@ -37,8 +37,7 @@ import com.ruizton.main.model.Fvirtualcointype;
  */
 @Repository
 public class FvirtualcointypeDAO extends HibernateDaoSupport {
-	private static final Logger log = LoggerFactory
-			.getLogger(FvirtualcointypeDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(FvirtualcointypeDAO.class);
 	// property constants
 	public static final String FNAME = "fname";
 	public static final String FDESCRIPTION = "fdescription";
@@ -224,6 +223,18 @@ public class FvirtualcointypeDAO extends HibernateDaoSupport {
 		}
 		return list;
 	}
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           findByParam 
+	 *  时间：           2018年8月14日
+	 *  描述：           
+	 *  
+	 *  @param firstResult 起始页
+	 *  @param maxResults 最大显示数量
+	 *  @param filter 条件
+	 *  @return List<Fvirtualcointype>
+	 */
 	public List<Fvirtualcointype> findByParam(int firstResult, int maxResults, String filter) {
 		List<Fvirtualcointype> list = null;
 		log.debug("finding Fvirtualcointype instance with filter");

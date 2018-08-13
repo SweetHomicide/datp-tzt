@@ -130,8 +130,6 @@ var reg = {
 		}
 	},
 	regSubmit : function() {
-		
-		
 		/*
 		 * var areaCode =
 		 * document.getElementById("register-phone-areacode").innerHTML;

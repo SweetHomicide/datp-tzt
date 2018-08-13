@@ -1149,7 +1149,7 @@ public class BaseController {
 				messageValidate2.getCode()));
 		fvalidatemessage.setFcreateTime(Utils.getTimestamp());
 		fvalidatemessage.setFphone(phone);
-		fvalidatemessage.setFstatus(ValidateMessageStatusEnum.Not_send);
+		fvalidatemessage.setFstatus(ValidateMessageStatusEnum.Not_send); //默认未发送出去 
 		this.frontValidateService.addFvalidateMessage(fvalidatemessage);
 
 		this.taskList.returnMessageList(fvalidatemessage.getFid());

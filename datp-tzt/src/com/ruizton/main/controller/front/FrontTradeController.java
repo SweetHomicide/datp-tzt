@@ -37,6 +37,13 @@ import com.ruizton.util.Utils;
 
 import net.sf.json.JSONObject;
 
+/**
+ * @author   Dylan
+ * @data     2018年8月13日
+ * @typeName FrontTradeController
+ * 说明 ：前台交易
+ *
+ */
 @Controller
 public class FrontTradeController extends BaseController {
 	@Autowired
@@ -60,14 +67,25 @@ public class FrontTradeController extends BaseController {
 	@Autowired
 	private FrontOthersService frontOthersService ;
 	
-	
+	/***
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           coin 
+	 *  时间：           2018年8月13日
+	 *  描述：           去交易 跳转到交易详情页面
+	 *  
+	 *  @param request
+	 *  @param coinType 
+	 *  @param tradeType
+	 *  @return 
+	 *  @throws Exception
+	 */
 	@RequestMapping("/trade/coin")
-	public ModelAndView coin(
-			HttpServletRequest request,
+	public ModelAndView coin(HttpServletRequest request,
 			@RequestParam(required=false,defaultValue="0")String coinType,//VirtualCoinTypeEnum
 			@RequestParam(required=false,defaultValue="0")int tradeType
 			) throws Exception{
-		String currentPage="1";
+		String currentPage="1";//页码
 		int pageSize = Comm.getPAGE_NUM();
 		int limitNum = (Integer.valueOf(currentPage)-1)*pageSize;
 		String filter = " and fisShare=1";

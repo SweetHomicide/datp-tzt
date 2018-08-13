@@ -1,10 +1,7 @@
 package com.ruizton.main.controller.front;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -18,26 +15,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ditp.service.FinacingService;
 import com.ruizton.main.Enum.UserStatusEnum;
-import com.ruizton.main.Enum.VirtualCoinTypeStatusEnum;
-import com.ruizton.main.auto.KlinePeriodData;
-import com.ruizton.main.auto.OneDayData;
-import com.ruizton.main.auto.RealTimeData;
-import com.ruizton.main.auto.TaskList;
 import com.ruizton.main.comm.ConstantMap;
 import com.ruizton.main.comm.KeyValues;
 import com.ruizton.main.controller.BaseController;
 import com.ruizton.main.model.Farticle;
 import com.ruizton.main.model.Farticletype;
-import com.ruizton.main.model.Ftradehistory;
 import com.ruizton.main.model.Fuser;
-import com.ruizton.main.model.Fvirtualcointype;
-import com.ruizton.main.service.admin.VirtualCoinService;
 import com.ruizton.main.service.front.FrontOthersService;
 import com.ruizton.main.service.front.FrontUserService;
-import com.ruizton.main.service.front.FrontVirtualCoinService;
 import com.ruizton.util.Comm;
-import com.ruizton.util.Utils;
 
+/**
+ * @author   Dylan
+ * @data     2018年8月13日
+ * @typeName FrontIndexController
+ * 说明 ：	程序首页入口 
+ * 		跳转到index首页面
+ *
+ */
 @Controller
 public class FrontIndexController extends BaseController {
 

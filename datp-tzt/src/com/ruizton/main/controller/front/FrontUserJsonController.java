@@ -142,9 +142,24 @@ public class FrontUserJsonController extends BaseController {
 		return modelAndView;
 	}
 	
-	/* @Param　regType:0手机，1email
-	 * @Return 1正常，-2名字重复，-4邮箱格式不对，-5客户端你没打开cookie
-	 * */
+	/**
+	 *  作者：           Dylan
+	 *  标题：           regIndex 
+	 *  时间：           2018年8月13日
+	 *  描述：           首页注册用户
+	 *  
+	 *  @param request
+	 *  @param response
+	 *  @param random
+	 *  @param password
+	 *  @param regName
+	 *  @param regType :0  手机   1 email
+	 *  @param vcode
+	 *  @param ecode
+	 *  @param phoneCode
+	 *  @return 1正常，-2名字重复，-4邮箱格式不对，-5客户端你没打开cookie
+	 *  @throws Exception
+	 */
 	@ResponseBody
 	@RequestMapping(value="/user/reg/index",produces=JsonEncode)
 	public String regIndex(

@@ -49,8 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="row">
 					<div class="col-xs-3" style="background:#fff;height:112px;" id="div3">	
 						<div class="all_coin_info1">
-							<span class="lefticon col-xs-2"
-					style="margin-right:5px;top:5px;width:50px;height:50px;background-image: url('${fvirtualcointype.furl }') ;background-size:100%;"></span>
+							<span class="lefticon col-xs-2" style="margin-right:5px;top:5px;width:50px;height:50px;background-image: url('${fvirtualcointype.furl }') ;background-size:100%;"></span>
 							<a href="javascript:void(0);" rel="drevil" title="请选择"  class="cointype" id="cointype"> <!-- onmouseover="changeDown()" onmouseout="changeUp()" -->${fvirtualcointype.fname }</a>
 							<span class="arrow-down" id="icon1"></span>
 						</div>

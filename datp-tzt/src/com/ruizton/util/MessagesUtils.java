@@ -106,6 +106,23 @@ public class MessagesUtils {
     	return sendSMS.sendHbSms(name,password,key,content,tel,msgId,ext) ;
     }
     
+    /**
+     * 
+     *  作者：           Dylan
+     *  标题：           sendM5C 
+     *  时间：           2018年8月13日
+     *  描述：          发送短信    
+     *  平台服务账号密码可用  相关数据库表【fsystemargs】中进行配置 
+     *  messageName = klzl
+     *  messagePassword = ASD12345
+     *  messageKey = e4104d82b6dca2329c32b9c08e741421
+     *  不抛异常则正常发送 成功状态
+     *  @param name 短信平台账号 : klzl
+     *  @param password 短信平台密码：  ASD12345
+     *  @param key  短信平台key :e4104d82b6dca2329c32b9c08e741421
+     *  @param content  内容
+     *  @param tel    手机
+     */
     public static void sendM5C(String name, String password, String key, String content, String tel) {
     	try {
 			sendSMS.send(name, password, key, content, tel);

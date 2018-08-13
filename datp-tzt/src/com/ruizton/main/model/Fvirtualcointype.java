@@ -36,10 +36,10 @@ public class Fvirtualcointype implements java.io.Serializable {
 	private int fid_s;
 	private boolean fisShare;// 是否可以交易
 	private boolean FIsWithDraw;// 是否可以充值提现
-	private String fname;
-	private String fShortName;
-	private String fdescription;
-	private Timestamp faddTime;
+	private String fname;//币种名称
+	private String fShortName;//简写名称
+	private String fdescription;//描述
+	private Timestamp faddTime;//添加时间
 	private int fstatus;// VirtualCoinTypeStatusEnum
 	private String fstatus_s;
 	private String fSymbol;
@@ -48,8 +48,8 @@ public class Fvirtualcointype implements java.io.Serializable {
 	private String fip;
 	private String fport;
 	private double lastDealPrize;// fake,最新成交价格
-	private double higestBuyPrize;
-	private double lowestSellPrize;
+	private double higestBuyPrize;//最高买入
+	private double lowestSellPrize;//最低卖出
 	private boolean canLend;// 是否可以借贷
 	private boolean fisDefAsset;// 是否是默认资产   0不是  1是 
 	private Set<Ffees> ffees = new HashSet<Ffees>(0);

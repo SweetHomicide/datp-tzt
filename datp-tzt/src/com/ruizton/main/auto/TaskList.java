@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,6 +19,14 @@ import com.ruizton.main.service.admin.VirtualCoinService;
 import com.ruizton.main.service.admin.VirtualWalletService;
 import com.ruizton.main.service.front.FrontValidateService;
 
+/**
+ * 定时任务
+ * @author   Dylan
+ * @data     2018年8月13日
+ * @typeName TaskList
+ * 说明 ：存储到LinkedList中 待定时线程进行处理
+ * 		
+ */
 public class TaskList {
 	@Autowired
 	private FrontValidateService frontValidateService ;
@@ -111,11 +118,21 @@ public class TaskList {
 		}
 	}
 
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           getOneMessage 
+	 *  时间：           2018年8月13日
+	 *  描述：          从LinkedList的对象messageList集合列表中弹出一个数据
+	 *  	         根据LinkedList的pop()函数属性 ，弹出后一个数据后 则列表中就会减少一个数据
+	 *  	         相反的函数有push()函数 ，将一个元素推送到LinkedList列表中
+	 *  @return
+	 */
 	public synchronized String getOneMessage() {
 		synchronized (messageList) {
 			String id = "" ;
 			if(messageList.size()>0){
-				id = messageList.pop() ;
+				id = messageList.pop() ; //从LinkedList的对象messageList集合列表中弹出一个数据
 			}
 			return id ;
 		}

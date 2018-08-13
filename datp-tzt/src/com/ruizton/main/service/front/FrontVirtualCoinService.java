@@ -212,6 +212,18 @@ public class FrontVirtualCoinService {
 		List<Fvirtualcointype> findByParam = this.fvirtualcointypeDAO.findByParam(firstResult, maxResults);
 		return findByParam;
 	}
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           findByParam 
+	 *  时间：           2018年8月14日
+	 *  描述：           
+	 *  
+	 *  @param firstResult 起始页
+	 *  @param maxResults  最大显示数量
+	 *  @param filter 查询条件
+	 *  @return
+	 */
 	public List<Fvirtualcointype> findByParam(int firstResult, int maxResults, String filter){
 		List<Fvirtualcointype> findByParam = this.fvirtualcointypeDAO.findByParam(firstResult, maxResults, filter);
 		return findByParam;
