@@ -1,6 +1,5 @@
 package com.ruizton.main.controller;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ import com.ditp.dao.RedisDAO;
 import com.ruizton.main.Enum.MessageTypeEnum;
 import com.ruizton.main.Enum.ValidateMailStatusEnum;
 import com.ruizton.main.Enum.ValidateMessageStatusEnum;
-import com.ruizton.main.Enum.VirtualCoinTypeStatusEnum;
 import com.ruizton.main.auto.OneDayData;
 import com.ruizton.main.auto.RealTimeData;
 import com.ruizton.main.auto.TaskList;
@@ -79,6 +77,15 @@ public class BaseController {
 	@Autowired
 	private SubscriptionService subscriptionService;
 
+	/**
+	 *  作者：           Dylan
+	 *  标题：           getSession 
+	 *  时间：           2018年8月14日
+	 *  描述：           获取请求中的session对象
+	 *  
+	 *  @param request
+	 *  @return 通过 request.getSession()获取HttpSession对象
+	 */
 	public HttpSession getSession(HttpServletRequest request) {
 		return request.getSession();
 	}
@@ -226,22 +233,37 @@ public class BaseController {
 		return cookieValue;
 	}
 
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           isNeedTradePassword 
+	 *  时间：           2018年8月14日
+	 *  描述：           判断是否需要交易密码 ， 
+	 *  
+	 *  @param request
+	 *  @return  true 不需要  / false 需要
+	 */
 	public boolean isNeedTradePassword(HttpServletRequest request) {
-		if (GetSession(request) == null)
+		if (GetSession(request) == null)//如果session中没有用户信息 则直接返回
 			return true;
+		//当前时间
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//用户 id+trade = key
+		// GetSession(request) 获取用户 
+		// getSession(request) 获取session 
 		String key = GetSession(request).getFid() + "trade";
-		Object obj = getSession(request).getAttribute(key);
+		Object obj = getSession(request).getAttribute(key);//从session中根据key获取交易对象
 
 		if (obj == null) {
-			return true;
+			return true;//不需要
 		} else {
 			try {
+				//从系统设置表中获取 超过多少小时需要输入交易密码字段tradePasswordHour 默认为5
 				double hour = Double.valueOf(this.systemArgsService.getValue("tradePasswordHour"));
-				double lastHour = Utils
-						.getDouble((sdf.parse(obj.toString()).getTime() - new Date().getTime()) / 1000 / 60 / 60, 2);
+				//获取时间减去当前时间 
+				double lastHour = Utils.getDouble((sdf.parse(obj.toString()).getTime() - new Date().getTime()) / 1000 / 60 / 60, 2);
 				if (lastHour >= hour) {
-					getSession(request).removeAttribute(key);
+					getSession(request).removeAttribute(key);//删除
 					return true;
 				} else {
 					return false;
@@ -1350,6 +1372,16 @@ public class BaseController {
 		return totalCount / maxResults + (totalCount % maxResults == 0 ? 0 : 1);
 	}
 
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           isLimitTrade 
+	 *  时间：           2018年8月14日
+	 *  描述：           根据币种id获取limitTrade表中的集合 然后获取该集合中的第一个Flimittrade对象
+	 *  
+	 *  @param vid 币种id
+	 *  @return
+	 */
 	public Flimittrade isLimitTrade(String vid) {
 		Flimittrade flimittrade = null;
 		String filter = "where fvirtualcointype.fid='" + vid + "'";

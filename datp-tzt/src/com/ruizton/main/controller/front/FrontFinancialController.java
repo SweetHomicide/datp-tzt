@@ -6,7 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.omg.CORBA.COMM_FAILURE;
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +29,13 @@ import com.ruizton.main.service.front.FrontVirtualCoinService;
 import com.ruizton.util.Comm;
 import com.ruizton.util.Utils;
 
-import net.sf.json.JSONObject;
-
+/**
+ * @author   Dylan
+ * @data     2018年8月14日
+ * @typeName FrontFinancialController
+ * 说明 ：前端个人资产
+ *
+ */
 @Controller
 public class FrontFinancialController extends BaseController {
 
@@ -40,24 +46,38 @@ public class FrontFinancialController extends BaseController {
 	@Autowired
 	private VirtualCoinService virtualCoinService;
 	
+	/**
+	 *  左菜单 - 个人资产
+	 *  作者：           Dylan
+	 *  标题：           index 
+	 *  时间：           2018年8月14日
+	 *  描述：          查询当前用户的个人资产
+	 *  
+	 *  @param request 请求
+	 *  @param currentPage 当前页
+	 *  @return
+	 *  @throws Exception
+	 */
 	@RequestMapping("/financial/index")
-	public ModelAndView index(
-			HttpServletRequest request,
-			@RequestParam(required=false,defaultValue="1")int currentPage
-			) throws Exception{
+	public ModelAndView index(HttpServletRequest request,
+			@RequestParam(required=false,defaultValue="1")int currentPage) throws Exception{
+		
 		int firstResult = (currentPage-1)*Comm.getMAXRESULT();
 		ModelAndView modelAndView = new ModelAndView() ;
+		//当前登录用户
 		Fuser fuser = this.frontUserService.findById(GetSession(request).getFid()) ;
+		//根据用户id获取该用户的钱包集合信息
 		List<Fvirtualwallet> fvirtualwallet = this.frontUserService.findVirtualWallet(GetSession(request).getFid(), firstResult, Comm.getMAXRESULT(), true) ;
 		String sql = "select count(*) from Fvirtualwallet where fuser.fid='"+GetSession(request).getFid()+"' and fvirtualcointype.fstatus=1";
-		int count = this.frontVirtualCoinService.findCount(sql);
+		int count = this.frontVirtualCoinService.findCount(sql); //正常的钱包资产数量
+		
 		String methods = "ajaxPersonalAssets";
 		String pagin = this.generatePaginX(count/Comm.getMAXRESULT()+( (count%Comm.getMAXRESULT())==0?0:1), Integer.valueOf(currentPage), methods) ;
 		modelAndView.addObject("count", count);
 		modelAndView.addObject("pagin", pagin);
 		modelAndView.addObject("fvirtualwallet", fvirtualwallet);
 		modelAndView.addObject("fuser", fuser) ;
-		modelAndView.setViewName("front/financial/index") ;
+		modelAndView.setViewName("front/financial/index");
 		return modelAndView ;
 	}
 	/*

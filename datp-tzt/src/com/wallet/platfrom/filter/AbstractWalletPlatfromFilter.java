@@ -30,6 +30,13 @@ import com.wallet.platfrom.sdk.beans.WithdrawDataBean;
 import com.wallet.platfrom.util.RSAResult;
 import com.wallet.platfrom.util.RSAUtil;
 
+/**
+ * @author   Dylan
+ * @data     2018年8月14日
+ * @typeName AbstractWalletPlatfromFilter
+ * 说明 ：钱包管理平台拦截器
+ *
+ */
 public abstract class AbstractWalletPlatfromFilter implements Filter {
 
 	private static String charset = null;
@@ -46,9 +53,8 @@ public abstract class AbstractWalletPlatfromFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
+		//获取钱包管理平台发送请求的方法
 		String walletMethod = request.getParameter("wallet.platfrom.method");
-		
-
 
         ServletContext servletContext=((HttpServletRequest)request).getSession().getServletContext();
 		ApplicationContext ctx=WebApplicationContextUtils.getWebApplicationContext(servletContext);
@@ -59,11 +65,11 @@ public abstract class AbstractWalletPlatfromFilter implements Filter {
 		
 		
 		if (null != walletMethod && walletMethod.trim().length() > 0) {
-			String data = request.getParameter("wallet.platfrom.data");
-			String sign = request.getParameter("sign");
-			if ("newaddress".equals(walletMethod)) {
+			String data = request.getParameter("wallet.platfrom.data");//数据
+			String sign = request.getParameter("sign");//签名
+			if ("newaddress".equals(walletMethod)) {//获取地址池
 				processNewAddress((HttpServletRequest) request, (HttpServletResponse) response, data, sign);
-			} else if ("charge".equals(walletMethod)) {
+			} else if ("charge".equals(walletMethod)) {//充币交易数据处理
 				processChange((HttpServletRequest) request, (HttpServletResponse) response, data, sign);
 			} else if ("confirm".equals(walletMethod)) {
 				processConfirm((HttpServletRequest) request, (HttpServletResponse) response, data, sign);
@@ -111,6 +117,18 @@ public abstract class AbstractWalletPlatfromFilter implements Filter {
 		}
 	}
 
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           processChange 
+	 *  时间：           2018年8月15日
+	 *  描述：           
+	 *  
+	 *  @param request
+	 *  @param response
+	 *  @param data 
+	 *  @param sign
+	 */
 	private void processChange(HttpServletRequest request, HttpServletResponse response, String data, String sign) {
 		OutputBean output = new OutputBean();
 		Map<String, String> paramMap = checkData(response, data, sign);
@@ -156,8 +174,9 @@ public abstract class AbstractWalletPlatfromFilter implements Filter {
 				writeOutput(response, output);
 				return;
 			}
-			
+			//交易所实现了sdk的接口
 			ProcessResult result = IWalletPlatfromInterface.charge(txid, address, amount);
+			
 			if (null == result) {
 				output.setSuccess(true);
 				output.setCode(0);
@@ -227,8 +246,21 @@ public abstract class AbstractWalletPlatfromFilter implements Filter {
 		}
 	}
 
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           processGetWithdrawData 
+	 *  时间：           2018年8月14日
+	 *  描述：           
+	 *  
+	 *  @param request
+	 *  @param response
+	 *  @param data 请求数据
+	 *  @param sign 签名
+	 */
 	private void processGetWithdrawData(HttpServletRequest request, HttpServletResponse response, String data, String sign) {
 		OutputBean output = new OutputBean();
+		//
 		Map<String, String> paramMap = checkData(response, data, sign);
 		if (null != paramMap) {
 			List<WithdrawDataBean> datas = IWalletPlatfromInterface.getWithdrawDatas();
@@ -370,10 +402,23 @@ public abstract class AbstractWalletPlatfromFilter implements Filter {
 		}
 	}
 	
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           checkData 
+	 *  时间：           2018年8月14日
+	 *  描述：           
+	 *  
+	 *  @param response
+	 *  @param data 
+	 *  @param sign
+	 *  @return
+	 */
 	private Map<String, String> checkData(HttpServletResponse response, String data, String sign) {
 		OutputBean output = new OutputBean();
 		RSAResult result = null;
 		try {
+			//解密数据 获得返回结果该RSAResult对象在 
 			result = decrypt(data, sign);
 		} catch (Exception e) {
 			output.setSuccess(false);
@@ -449,6 +494,18 @@ public abstract class AbstractWalletPlatfromFilter implements Filter {
 		}
 	}
 
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           decrypt 
+	 *  时间：           2018年8月14日
+	 *  描述：           解密数据
+	 *  
+	 *  @param data
+	 *  @param sign
+	 *  @return
+	 *  @throws Exception
+	 */
 	private RSAResult decrypt(String data, String sign) throws Exception {
 		return RSAUtil.decript(IWalletPlatfromInterface.getConfig().getPublicKeyFile(), data, sign, charset);
 	}
@@ -457,6 +514,16 @@ public abstract class AbstractWalletPlatfromFilter implements Filter {
 		return RSAUtil.encript(IWalletPlatfromInterface.getConfig().getPrivateKeyFile(), data, charset);
 	}
 
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           praseData 
+	 *  时间：           2018年8月15日
+	 *  描述：           参数处理类 将data分割 存储到map中
+	 *  
+	 *  @param data
+	 *  @return  Map<String, String> 参数集合
+	 */
 	private static Map<String, String> praseData(String data) {
 		Map<String, String> map = new HashMap<String, String>();
 		if (null != data && data.trim().length() > 0) {

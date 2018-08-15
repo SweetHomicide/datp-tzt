@@ -290,6 +290,21 @@ public class FrontAccountController extends BaseController{
 		modelAndView.setViewName("front/account/account_withdrawcny") ;
 		return modelAndView ;
 	}
+	
+	/**
+	 *  前台-财务管理 - 数字资产转入
+	 *  作者：           Dylan
+	 *  标题：           rechargeBtc 
+	 *  时间：           2018年8月14日
+	 *  描述：            
+	 *  
+	 *  @param request
+	 *  @param currentPage
+	 *  @param currentPage1
+	 *  @param symbol 币种id
+	 *  @return
+	 *  @throws Exception
+	 */
 	@RequestMapping("account/rechargeBtc")
 	public ModelAndView rechargeBtc(
 			HttpServletRequest request,
@@ -301,42 +316,50 @@ public class FrontAccountController extends BaseController{
 		int count = 0;
 		String sql;
 		List<Fvirtualcointype> fList;
-		int limitNum = (Integer.valueOf(currentPage1)-1)*pageSize;
-		String filter1 = " and FIsWithDraw = 1 ";
+		int limitNum = (Integer.valueOf(currentPage1)-1)*pageSize;//起始页=当前页-1*pagesize
+		String filter1 = " and FIsWithDraw = 1 "; //查找可以充值提现的币种
 		fList = this.frontVirtualCoinService.findByParam(limitNum, pageSize, filter1);
 		sql = "select count(*) from Fvirtualcointype where fstatus=1 "+filter1;
-		count = this.frontVirtualCoinService.findCount(sql);
+		count = this.frontVirtualCoinService.findCount(sql); //查找出正常状态的币种数量
 		String pagin1 = this.generatePagin2(count/pageSize+( (count%pageSize)==0?0:1), Integer.valueOf(currentPage1)) ;
 		
 		ModelAndView modelAndView = new ModelAndView() ;
 		modelAndView.addObject("fList", fList);
 		modelAndView.addObject("page", pagin1);
+		//判断当前页
 		int cur = 1 ;
 		if(currentPage==null||"".equals(currentPage)){
 			cur = 1; 
 		}else{
 			cur = Integer.parseInt(currentPage) ;
 		}
+		//当前登录用户
 		Fuser fuser = this.frontUserService.findById(GetSession(request).getFid()) ;
 		
 		Fvirtualcointype fvirtualcointype = this.frontVirtualCoinService.findFvirtualCoinById(symbol) ;
+		//如果是禁用 或者 不可以充值
 		if(fvirtualcointype==null 
 				|| fvirtualcointype.getFstatus()==VirtualCoinTypeStatusEnum.Abnormal 
 				|| !fvirtualcointype.isFIsWithDraw()){
+			//查找所有可以充值状态正常的币种集合
 			String filter = "where fstatus=1 and FIsWithDraw=1 order by fid asc";
 			List<Fvirtualcointype> alls = this.virtualCoinService.list(0, 1, filter, true);
 			if(alls==null || alls.size() ==0){
 				modelAndView.setViewName("redirect:/") ;
 				return modelAndView ;
 			}
+			//获得币种0
 			fvirtualcointype = alls.get(0);
 			symbol = fvirtualcointype.getFid();
 		}
+		
+		//获取一个地址
 		Fvirtualaddress fvirtualaddress = this.frontVirtualCoinService.findFvirtualaddress(fuser, fvirtualcointype) ;
 		
 		//最近十次充值记录
 		String filter ="where fuser.fid='"+fuser.getFid()+"' and ftype="+VirtualCapitalOperationTypeEnum.COIN_IN
 				+" and fvirtualcointype.fid='"+fvirtualcointype.getFid()+"' order by fCreateTime desc";
+		//充值记录
 		List<Fvirtualcaptualoperation> fvirtualcaptualoperations = this.frontVirtualCoinService.findFvirtualcaptualoperation((cur-1)*Constant.RecordPerPage, Constant.RecordPerPage, filter, true);
 		int totalCount = this.adminService.getAllCount("Fvirtualcaptualoperation", filter.toString());
 		String url = "/account/rechargeBtc.html?symbol="+symbol+"&";

@@ -182,7 +182,16 @@ public final class Comm {
 			public static void setURLHEAD(String uRLHEAD) {
 				URLHEAD = uRLHEAD;
 			}
-
+				
+			/**
+			 * 
+			 *  作者：           Dylan
+			 *  标题：           getPAGE_NUM 
+			 *  时间：           2018年8月14日
+			 *  描述：           交易中心分页 配置在comm.properties文件中  默认为10页
+			 *  
+			 *  @return int
+			 */
 			public static int getPAGE_NUM() {
 				return PAGE_NUM;
 			}

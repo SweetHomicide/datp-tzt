@@ -548,7 +548,23 @@ public class FrontTradeService {
 		return list;
 	}
 
-	// 委托记录
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           findFentrustHistory 
+	 *  时间：           2018年8月14日
+	 *  描述：           委托记录
+	 *  
+	 *  @param fuid  用户id
+	 *  @param fvirtualCoinTypeId 币种id
+	 *  @param entrust_type  
+	 *  @param first_result 起始页
+	 *  @param max_result   最大显示页
+	 *  @param order  排序规则
+	 *  @param entrust_status 数组 交易状态  取决于EntrustStatusEnum类
+	 *  @return
+	 *  @throws Exception
+	 */
 	public List<Fentrust> findFentrustHistory(String fuid, String fvirtualCoinTypeId, int[] entrust_type,
 			int first_result, int max_result, String order, int entrust_status[]) throws Exception {
 		List<Fentrust> list = this.fentrustDAO.getFentrustHistory(fuid, fvirtualCoinTypeId, entrust_type, first_result,

@@ -1,9 +1,8 @@
 package com.ruizton.main.model;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,14 +10,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * Fvirtualwallet entity. @author MyEclipse Persistence Tools
+ * 用户钱包表
+ * @author   Dylan
+ * @data     2018年8月14日
+ * @typeName Fvirtualwallet
+ * 说明 ：
+ *
  */
 @Entity
 @Table(name = "fvirtualwallet")
@@ -28,11 +31,11 @@ public class Fvirtualwallet implements java.io.Serializable {
 	// Fields
 
 	private String fid;
-	private Fvirtualcointype fvirtualcointype;
-	private double ftotal;
-	private double ffrozen;
+	private Fvirtualcointype fvirtualcointype;//币种类型
+	private double ftotal;//总数
+	private double ffrozen;//冻结
 	private Timestamp flastUpdateTime;
-	private Fuser fuser;
+	private Fuser fuser; //用户
 	private int version;
 
 	private double fborrowBtc;// 已借款

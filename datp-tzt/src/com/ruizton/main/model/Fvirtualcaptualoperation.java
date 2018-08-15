@@ -20,7 +20,12 @@ import com.ruizton.main.Enum.VirtualCapitalOperationInStatusEnum;
 import com.ruizton.main.Enum.VirtualCapitalOperationOutStatusEnum;
 
 /**
- * Fvirtualcaptualoperation entity. @author MyEclipse Persistence Tools
+ * 充值记录表
+ * @author   Dylan
+ * @data     2018年8月14日
+ * @typeName Fvirtualcaptualoperation
+ * 说明 ：
+ *
  */
 @Entity
 @Table(name = "fvirtualcaptualoperation")
@@ -28,15 +33,14 @@ import com.ruizton.main.Enum.VirtualCapitalOperationOutStatusEnum;
 public class Fvirtualcaptualoperation implements java.io.Serializable {
 
 	// Fields
-
 	private String fid;
-	private Fuser fuser;
-	private Fvirtualcointype fvirtualcointype;
-	private Timestamp fcreateTime;
-	private Timestamp flastUpdateTime;
-	private double famount;
-	private double ffees;
-	private int ftype;// 充值或提现VirtualCapitalOperationTypeEnum
+	private Fuser fuser;//用户id
+	private Fvirtualcointype fvirtualcointype;//币种id
+	private Timestamp fcreateTime;//创建时间
+	private Timestamp flastUpdateTime;//最后更新时间
+	private double famount;//数量
+	private double ffees;//费
+	private int ftype;// 充值或提现 VirtualCapitalOperationTypeEnum
 	private String ftype_s;
 	private int fstatus;// VirtualCoinOperationInStatusEnum||VirtualCoinOperationOutStatusEnum
 	private String fstatus_s;

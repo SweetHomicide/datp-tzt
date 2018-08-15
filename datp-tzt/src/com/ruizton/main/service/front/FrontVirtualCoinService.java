@@ -69,12 +69,25 @@ public class FrontVirtualCoinService {
 		return fvirtualcointype ;
 	}
 	
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           findFirstFirtualCoin 
+	 *  时间：           2018年8月14日
+	 *  描述：            如果type！=0 则查找所有虚拟币区的正常状态且可以交易的货币信息
+	 *  	            如果type =0 则查找所有正常状态且可以交易的币种信息  没有type虚拟币条件限制
+	 *  
+	 *  @param type 取值 ： A_VALUE = 1;//正常  “虚拟币区”   类 ：CoinTypeEnum 
+	 *  @return Fvirtualcointype
+	 */
 	public Fvirtualcointype findFirstFirtualCoin(int type){
 		Fvirtualcointype fvirtualcointype = null ;
+		//条件 状态正常 可以交易
 		String filter ="where fstatus="+VirtualCoinTypeStatusEnum.Normal+" and fisShare=1";
 		if(type !=0){//可以交易
 			filter = filter +" and ftype="+type;
 		}
+		//查询出虚拟币区可以交易的货币集合
 		List<Fvirtualcointype> list = this.fvirtualcointypeDAO.list(0, 0, filter, false);
 		if(list.size()>0){
 			fvirtualcointype = list.get(0) ;
@@ -83,7 +96,7 @@ public class FrontVirtualCoinService {
 				fvirtualcointype = findFirstFirtualCoin(0);
 			}
 		}
-		return fvirtualcointype ;
+		return fvirtualcointype;
 	}
 	
 	public Fvirtualcointype findFirstFirtualCoin_Wallet(){
@@ -96,6 +109,17 @@ public class FrontVirtualCoinService {
 		return fvirtualcointype ;
 	}
 	
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           findFvirtualaddress 
+	 *  时间：           2018年8月14日
+	 *  描述：           根据当前用户和币种类型获取一个用户币种地址
+	 *  
+	 *  @param fuser 当前登录用户
+	 *  @param fvirtualcointype 币种类型
+	 *  @return Fvirtualaddress 用户币种地址表
+	 */
 	public Fvirtualaddress findFvirtualaddress(Fuser fuser,Fvirtualcointype fvirtualcointype){
 		return this.fvirtualaddressDAO.findFvirtualaddress(fuser, fvirtualcointype) ;
 	}
@@ -236,7 +260,7 @@ public class FrontVirtualCoinService {
 	 *  @param firstResult 起始页
 	 *  @param maxResults  最大显示数量
 	 *  @param filter 查询条件
-	 *  @return
+	 *  @return List<Fvirtualcointype>
 	 */
 	public List<Fvirtualcointype> findByParam(int firstResult, int maxResults, String filter){
 		List<Fvirtualcointype> findByParam = this.fvirtualcointypeDAO.findByParam(firstResult, maxResults, filter);

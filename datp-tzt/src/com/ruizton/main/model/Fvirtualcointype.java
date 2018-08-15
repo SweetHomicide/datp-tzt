@@ -88,7 +88,7 @@ public class Fvirtualcointype implements java.io.Serializable {
 	private double fprice;
 	private Double total;
 	
-	private int ftype;
+	private int ftype;//类型：  虚拟币区
 	private String ftype_s;
 
 	// Constructors

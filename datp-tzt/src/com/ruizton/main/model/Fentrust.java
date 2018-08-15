@@ -26,31 +26,36 @@ import com.ruizton.main.service.front.FrontUserService;
 import net.sf.json.JSONObject;
 
 /**
- * Fentrust entity. @author MyEclipse Persistence Tools
+ * @author   Dylan
+ * @data     2018年8月14日
+ * @typeName Fentrust
+ * 说明 ：	委托单类 
+ *
  */
 @Entity
 @Table(name = "fentrust")
 // @Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 //委托单
 public class Fentrust implements java.io.Serializable {
-
-	/**
-	 * 
-	 */
+ 
 	private static final long serialVersionUID = 2083829370997350052L;
 	// Fields
 	private String fid;
-	private Fvirtualcointype fvirtualcointype;
-	private Fuser fuser;
-	private Timestamp fcreateTime;
-	private Timestamp flastUpdatTime;
-	private int fentrustType;// EntrustTypeEnum
+	private Fvirtualcointype fvirtualcointype; //币种id
+	private Fuser fuser;//用户id
+	private Timestamp fcreateTime;//创建时间
+	private Timestamp flastUpdatTime;//最后更新时间
+	private int fentrustType;// EntrustTypeEnum  状态 
+//				Going 	 = 1; 未成交
+//	  			PartDeal = 2; 部分成交
+//	  			AllDeal  = 3; 完全成交
+//	  			Cancel   = 4; 撤销
 	private String fentrustType_s;
 	private double fprize;
 	private double famount;
 	private double ffees ;
 	private double fleftfees ;
-	private double fsuccessAmount;
+	private double fsuccessAmount;//成交数量
 	private double fcount;
 	private double fleftCount;// 未成交数量
 	private int fstatus;// EntrustStatusEnum
@@ -58,10 +63,6 @@ public class Fentrust implements java.io.Serializable {
 	private boolean fisLimit;// 按照市价完全成交的订单
 	private int version;
 	private boolean fhasSubscription;
-
-	// Constructors
-
-
 
 	/** default constructor */
 	public Fentrust() {

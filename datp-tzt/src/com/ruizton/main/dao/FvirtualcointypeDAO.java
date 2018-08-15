@@ -182,8 +182,20 @@ public class FvirtualcointypeDAO extends HibernateDaoSupport {
 		return flag;
 	}
 	
-	public List<Fvirtualcointype> list(int firstResult, int maxResults,
-			String filter,boolean isFY) {
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           list 
+	 *  时间：           2018年8月14日
+	 *  描述：           使用getSession().createQuery(HQL) 的分页查询 
+	 *  
+	 *  @param firstResult 起始页
+	 *  @param maxResults  最大显示数
+	 *  @param filter 条件
+	 *  @param isFY 是否分页
+	 *  @return  List<Fvirtualcointype>
+	 */
+	public List<Fvirtualcointype> list(int firstResult, int maxResults,String filter,boolean isFY) {
 		List<Fvirtualcointype> list = null;
 		log.debug("finding Fvirtualcointype instance with filter");
 		try {
@@ -193,7 +205,7 @@ public class FvirtualcointypeDAO extends HibernateDaoSupport {
 				queryObject.setFirstResult(firstResult);
 				queryObject.setMaxResults(maxResults);
 			}
-			list = queryObject.list();
+				list = queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find Fvirtualcointype by filter name failed", re);
 			throw re;

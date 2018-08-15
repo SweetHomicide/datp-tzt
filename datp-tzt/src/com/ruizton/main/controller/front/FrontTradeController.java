@@ -42,7 +42,6 @@ import net.sf.json.JSONObject;
  * @data     2018年8月13日
  * @typeName FrontTradeController
  * 说明 ：前台交易
- *
  */
 @Controller
 public class FrontTradeController extends BaseController {
@@ -89,7 +88,7 @@ public class FrontTradeController extends BaseController {
 		int pageSize = Comm.getPAGE_NUM();
 		int limitNum = (Integer.valueOf(currentPage)-1)*pageSize;
 		String filter = " and fisShare=1";
-		//查询出可以交易的币种类集合
+		//查询出可以交易的币种类
 		List<Fvirtualcointype> fList = this.frontVirtualCoinService.findByParam(limitNum, pageSize, filter);
 		//查询有效币种数量 count
 		String sql = "select count(*) from Fvirtualcointype where fstatus=1"+ filter;
@@ -119,7 +118,7 @@ public class FrontTradeController extends BaseController {
 		if(fvirtualcointype==null 
 				 || fvirtualcointype.getFstatus()==VirtualCoinTypeStatusEnum.Abnormal
 				 || !fvirtualcointype.isFisShare()){
-			
+			//查找第一个正常交易的货币
 			fvirtualcointype = this.frontVirtualCoinService.findFirstFirtualCoin(0) ;
 			if(fvirtualcointype==null){
 				modelAndView.setViewName("redirect:/") ;
@@ -127,7 +126,7 @@ public class FrontTradeController extends BaseController {
 				modelAndView.setViewName("redirect:/trade/coin.html?coinType="+fvirtualcointype.getFid()+"&tradeType=0") ;
 			}
 			return modelAndView ;
-		}
+		}//逻辑梳理：如果前端币种id条件查询的该货币交易不可以交易  则取库中所有可以交易的币种的第一个币种
 		
 		coinType = fvirtualcointype.getFid();
 		
@@ -141,23 +140,24 @@ public class FrontTradeController extends BaseController {
 			downPrice = Utils.getDouble(limittrade.getFdownprice()-limittrade.getFdownprice()*limittrade.getFpercent(), fvirtualcointype.getFcount());
 			if(downPrice <0) downPrice=0;
 		}
-		modelAndView.addObject("fList", fList);
-		modelAndView.addObject("pagins", pagin);
-		modelAndView.addObject("cur_page", currentPage) ;
+		modelAndView.addObject("fList", fList);//查询出可以交易的币种类集合
+		modelAndView.addObject("pagins", pagin);//分页
+		modelAndView.addObject("cur_page", currentPage);//当前页
 		modelAndView.addObject("isLimittrade", isLimittrade) ;
 		modelAndView.addObject("upPrice", upPrice) ;
 		modelAndView.addObject("downPrice", downPrice) ;
-
 		
-		
-		boolean isTradePassword = false;
+		boolean isTradePassword = false;//交易密码  如果用户登录了 交易密码也设置了 则需要交易密码
 		if(userid != null && fuser.getFtradePassword() != null && fuser.getFtradePassword().trim().length() >0){
 			isTradePassword = true;
 		}
 		
 		//委托记录
 		List<Fentrust> fentrusts = this.frontTradeService.findFentrustHistory(
-				userid, coinType,null, 0, 10, " fCreateTime desc ", new int[]{EntrustStatusEnum.Going,EntrustStatusEnum.PartDeal}) ;
+				userid, coinType,null, 0, 10, " fCreateTime desc ", 
+				new int[]{EntrustStatusEnum.Going,EntrustStatusEnum.PartDeal}
+				) ;
+		
 		
 		//是否需要输入交易密码
 		modelAndView.addObject("needTradePasswd", super.isNeedTradePassword(request)) ;

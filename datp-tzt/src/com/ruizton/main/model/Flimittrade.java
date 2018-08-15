@@ -26,7 +26,7 @@ public class Flimittrade implements java.io.Serializable {
 	// Fields
 
 	private String fid;
-	private Fvirtualcointype fvirtualcointype;
+	private Fvirtualcointype fvirtualcointype; //币种id
 	private Double fpercent;
 	private Double fupprice;
 	private Double fdownprice;

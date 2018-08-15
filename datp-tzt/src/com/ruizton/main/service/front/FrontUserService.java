@@ -672,8 +672,20 @@ public class FrontUserService extends BaseService {
 		
 	}
 
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           findVirtualWallet 
+	 *  时间：           2018年8月14日
+	 *  描述：           根据用户id查询币种状态正常的用户钱包信息
+	 *  
+	 *  @param fuid 用户id
+	 *  @param firstResult 起始页
+	 *  @param maxResult  最大返回
+	 *  @param isFY  是否分页
+	 *  @return List<Fvirtualwallet> 用户钱包集合
+	 */
 	public List<Fvirtualwallet> findVirtualWallet(String fuid, int firstResult, int maxResult, boolean isFY) {
-		// TODO Auto-generated method stub
 		List<Fvirtualwallet> fvirtualwallets = this.fvirtualwalletDAO.find(fuid, VirtualCoinTypeStatusEnum.Normal, firstResult, maxResult, isFY);
 		return fvirtualwallets;
 	}

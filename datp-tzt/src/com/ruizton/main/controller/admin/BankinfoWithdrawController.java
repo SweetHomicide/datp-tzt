@@ -90,6 +90,16 @@ public class BankinfoWithdrawController extends BaseController {
 		return modelAndView ;
 	}
 	
+	/**
+	 * 会员管理-会员虚拟币地址列表获取
+	 *  作者：           Dylan
+	 *  标题：           virtualaddressWithdrawList 
+	 *  时间：           2018年8月15日
+	 *  描述：           
+	 *  
+	 *  @return
+	 *  @throws Exception
+	 */
 	@RequestMapping("/ssadmin/virtualaddressWithdrawList")
 	public ModelAndView virtualaddressWithdrawList() throws Exception{
 		ModelAndView modelAndView = new ModelAndView() ;

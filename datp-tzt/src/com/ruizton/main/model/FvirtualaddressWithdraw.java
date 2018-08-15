@@ -23,9 +23,9 @@ public class FvirtualaddressWithdraw implements java.io.Serializable {
 
 	private String fid;
 	private int version;
-	private Fvirtualcointype fvirtualcointype;
-	private String fadderess;
-	private Fuser fuser ;
+	private Fvirtualcointype fvirtualcointype; //币种类型
+	private String fadderess;//地址
+	private Fuser fuser ;//用户
 	private Timestamp fcreateTime;
 	private String fremark;
 

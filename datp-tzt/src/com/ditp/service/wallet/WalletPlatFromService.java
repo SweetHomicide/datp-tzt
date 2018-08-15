@@ -114,17 +114,15 @@ public class WalletPlatFromService implements IWalletPlatfromInterface {
 			//根据充币地址匹配用户ID和币种类型
 			Fuser fuModel=new Fuser();//用户id
 			Fvirtualcointype fviType=new Fvirtualcointype();//币种类型
-
+			//根据充值地址查询交易所的用户地址表
 			List<Fvirtualaddress> listfviaddress=fvirtualaddressDAO.findByProperty("fadderess", address);
 			if(listfviaddress.size()>0)
 			{
 				for(Fvirtualaddress fviAddress:listfviaddress)
 				{
-					fuModel=fviAddress.getFuser();
-					fviType=fviAddress.getFvirtualcointype();
-
-
-			
+					fuModel=fviAddress.getFuser();//用户id
+					fviType=fviAddress.getFvirtualcointype();//币种id
+			//充值记录
 			fvtpt=new Fvirtualcaptualoperation();		
 			fvtpt.setFuser(fuModel);
 			fvtpt.setFvirtualcointype(fviType);
@@ -145,8 +143,9 @@ public class WalletPlatFromService implements IWalletPlatfromInterface {
 			
 			fvtpt.setFtradeUniqueNumber(txid);
 			virtualCapitaloperationService.saveObj(fvtpt);
-			 String fivwFilter="where fvirtualcointype.fid='"+fviType.getFid()+"' and fuser.fid='"+fuModel.getFid()+"'";
+			
 			//获取平台钱包
+			String fivwFilter="where fvirtualcointype.fid='"+fviType.getFid()+"' and fuser.fid='"+fuModel.getFid()+"'";
 			List<Fvirtualwallet> listFvirtualwallet= virtualWalletService.list(0, 0, fivwFilter, false);
 			
 			if(listFvirtualwallet.size()>0)

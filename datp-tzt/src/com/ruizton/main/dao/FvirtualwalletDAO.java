@@ -202,6 +202,20 @@ public class FvirtualwalletDAO extends HibernateDaoSupport {
 			throw re;
 		}
 	}
+	/**
+	 * 
+	 *  作者：           Dylan
+	 *  标题：           find 
+	 *  时间：           2018年8月14日
+	 *  描述：           
+	 *  
+	 *  @param fuid 用户id
+	 *  @param status  币种状态 
+	 *  @param firstResult 起始页
+	 *  @param maxResult 最大返回
+	 *  @param isFY 是否分页
+	 *  @return List<Fvirtualwallet> 用户钱包集合
+	 */
 	public List<Fvirtualwallet> find(String fuid,int status, int firstResult, int maxResult, boolean isFY){
 		log.debug("finding all Fvirtualwallet instances");
 		try {

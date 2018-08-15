@@ -161,10 +161,21 @@ public class FvirtualaddressDAO extends HibernateDaoSupport  {
         }
     }
     
+    /**
+     *  获得一个用户币种地址
+     *  作者：           Dylan
+     *  标题：           findFvirtualaddress 
+     *  时间：           2018年8月14日
+     *  描述：           
+     *  
+     *  @param fuser 当前用户
+     *  @param fvirtualcointype
+     *  @return Fvirtualaddress 用户币种地址
+     */
     public Fvirtualaddress findFvirtualaddress(Fuser fuser,Fvirtualcointype fvirtualcointype){
     	log.debug("findFvirtualaddress all Fvirtualaddress instances");
 		try {
-			String queryString = "from Fvirtualaddress where fuser.fid=? and fvirtualcointype.fid=? ";
+			 String queryString = "from Fvirtualaddress where fuser.fid=? and fvirtualcointype.fid=? ";
 	         Query queryObject = getSession().createQuery(queryString);
 	         queryObject.setParameter(0, fuser.getFid()) ;
 	         queryObject.setParameter(1, fvirtualcointype.getFid()) ;
